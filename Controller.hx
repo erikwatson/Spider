@@ -1,5 +1,6 @@
 package spider;
 
+import haxe.web.Dispatch;
 import php.Lib;
 
 class Controller
@@ -12,8 +13,7 @@ class Controller
 		Lib.println("Index");
 	}
 
-	public function doDefault(d:haxe.web.Dispatch):Void {
+	public function doDefault(d:Dispatch):Void {
 		Lib.println("Default");
-		trace(d.parts);
 	}
 }

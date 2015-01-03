@@ -2,11 +2,15 @@ package spider;
 
 class Spider
 {
+
+	public var routes:RouteCollection = new RouteCollection();
+
 	public function new(){
-		haxe.web.Dispatch.run( 
-			"index2", 
-			new haxe.ds.StringMap(), 
-			new spider.Controller()
-		);
+		setupTables();
+		this.routes.check("/");
+	}
+
+	public function setupTables():Void {
+
 	}
 }
