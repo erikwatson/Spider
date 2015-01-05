@@ -1,5 +1,7 @@
 package spider;
 
+import haxe.web.Dispatch;
+
 typedef Route = {
 	public var controller : Class<Controller>;
 }
@@ -7,7 +9,7 @@ typedef Route = {
 class RouteCollection
 {
 
-	private var routes:Map<String, Route> = new Map();
+	public var routes:Map<String, Route> = new Map();
 
 	public function new(){
 		
@@ -17,7 +19,7 @@ class RouteCollection
 		if(routes.exists(url)) {
 			throw 'Error: Route $url already exists, can not add it.';
 		} else {
-			routes.set("url", route);
+			routes.set(url, route);
 		}
 	}
 
@@ -29,11 +31,12 @@ class RouteCollection
 		}
 	}
 
-	public function check(url:String):Void {
-		if(routes.exists(url)) {
+	public function run(url:String):Void {
+		if(!routes.exists(url)) {
 			throw 'Error: Route $url does not exist.';
 		} else {
-			// run the route? 
+			// run the route
+			Dispatch.run(url, new haxe.ds.StringMap(), new controllers.Fart());
 		}
 	}
 }

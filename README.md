@@ -1,7 +1,7 @@
 Spider
 ======
 
-Spider builds Websites with Haxe targeting PHP with support for MySql and SQLite3.
+Spider is a tiny web framework for Haxe targeting PHP.
 
 
 ## Requirements
