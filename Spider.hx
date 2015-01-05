@@ -1,7 +1,11 @@
 package spider;
 
+import sys.FileSystem;
+
 import php.Web;
 import php.Session;
+
+import spider.Config.DBType;
 
 class Spider
 {
@@ -30,36 +34,39 @@ class Spider
 			makeSecure();
 		}
 
+		createDirectories();
+
 		Session.start();
 
-		database.connect();
+		if(Config.dbType != DBType.None) {
+			database.connect();
+		}
 
 		setupTables();
 		routes.run(url);
+
+		if(Config.dbType != DBType.None) {
+			database.close();
+		}
 
 		Session.close();
 
 		Log.sayIt();
 	}
 
-	public function redirectToHome():Void {
-		Web.redirect(Config.homeURL);
-	}
+	// create the directory structure if it doesn't already exist 
+	private function createDirectories():Void {
+		if(!FileSystem.isDirectory(Config.logLocation)) {
+			FileSystem.createDirectory(Config.logLocation);
+		}
 
-	public function redirectToLost():Void {
-		Web.redirect(Config.lostURL);
-	}
+		if(!FileSystem.isDirectory(Config.dbLocation)) {
+			FileSystem.createDirectory(Config.dbLocation);
+		}
 
-	public function redirectToLogin():Void {
-		Web.redirect(Config.loginURL);
-	}
-
-	public function redirectToLogout():Void {
-		Web.redirect(Config.logoutURL);
-	}
-
-	public function redirectToError():Void {
-		Web.redirect(Config.errorURL);
+		if(!FileSystem.isDirectory(Config.templatesLocation)) {
+			FileSystem.createDirectory(Config.templatesLocation);
+		}
 	}
 
 	public function hashPassword(password:String, salt:String):String {

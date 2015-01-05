@@ -9,6 +9,7 @@ import sys.db.Manager;
 import php.db.PDO;
 
 import spider.Config;
+import spider.Log;
 
 class DB
 {
@@ -40,10 +41,10 @@ class DB
 							Manager.initialize();
 
 						default:
-							throw "Error: Database Connection Error!";
+							Log.add("Error: Unecpected DB Type.");
 					}
 				} else {
-					throw "Error: Database Connection Error!";
+					Log.add("Error: DB Type can not be null.");
 				}
 			}
 		} catch(e:String) {
@@ -53,7 +54,7 @@ class DB
 
 	private function connectMySQL():Void {
 		if(Config.dbHost == null || Config.dbPort == null || Config.dbUser == null || Config.dbPass == null || Config.dbName == null) {
-			throw "Error: Database Connection Error!";
+			Log.add("Error: There is a problem with your MySQL Connection settings.");
 		} else {
 			dbConnect = sys.db.Mysql.connect(
 				{
@@ -71,9 +72,10 @@ class DB
 	}
 
 	private function connectSQLite():Void {
-		var path = Config.dbLocation += Config.dbName += ".db";
+		var path = Config.dbLocation;
 
-		trace(path);
+		path += Config.dbName;
+		path += ".db";
 
 		if(path == null) {
 			throw "Error: Database Connection Error!";
