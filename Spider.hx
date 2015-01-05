@@ -1,24 +1,39 @@
 package spider;
 
 import php.Web;
+import php.Session;
 
 class Spider
 {
 
 	public var config:Config = new Config();
+
 	public var routes:RouteCollection = new RouteCollection();
+
+	public static var IP(get, null):String;
+	public static var URI(get, null):String;
+	public static var method(get, null):String;
 
 	public function new(){
 		
 	}
 
-	public function run(url:String):Void {
-		setupTables();
-		routes.run(url);
-	}
-
+	// override this before you call run() 
 	public function setupTables():Void {
 
+	}
+
+	public function run(url:String):Void {
+		Session.start();
+
+		setupTables();
+		routes.run(url);
+
+		Session.close();
+	}
+
+	public function redirectToHome():Void {
+		Web.redirect(config.homeURL);
 	}
 
 	public function redirectToLost():Void {
@@ -27,5 +42,65 @@ class Spider
 
 	public function redirectToLogin():Void {
 		Web.redirect(config.loginURL);
+	}
+
+	public function redirectToLogour():Void {
+		Web.redirect(config.logoutURL);
+	}
+
+	public function hashPassword(password:String, salt:String):String {
+		return "";
+	}
+
+	public function generateSalt():String {
+		return "";
+	}
+
+	public function isAJAX():Bool {
+		return false;
+	}
+
+	public function isSecure():Bool {
+		return false;
+	}
+
+	public function makeSecure():Void {
+
+	}
+
+	public function sendEmails(emails:Map<String, String>):Void {
+		
+	}
+
+	public function sendEmail(address:String, message:String):Void {
+
+	}
+
+	public function isIPAddress(address:String):Bool {
+		return false;
+	}
+
+	public function isEmail(email:String):Bool {
+		return false;
+	}
+
+	public function isURL(url:String):Bool {
+		return false;
+	}
+
+	/*
+	 * 	Getters and Setters 
+	 */
+
+	private static function get_URI():String {
+		return Web.getURI();
+	}
+
+	private static function get_method():String {
+		return Web.getMethod();
+	}
+
+	private static function get_IP():String {
+		return Web.getClientIP();
 	}
 }
