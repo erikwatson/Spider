@@ -13,6 +13,9 @@ class Spider
 	public static var IP(get, null):String;
 	public static var URI(get, null):String;
 	public static var method(get, null):String;
+	public static var secure(get, null):Bool;
+	public static var AJAX(get, null):Bool;
+	public static var loggedIn(get, null):Bool;
 
 	public function new(){
 		
@@ -24,6 +27,10 @@ class Spider
 	}
 
 	public function run(url:String):Void {
+		if(config.sitewideSSL == true && secure == false) {
+			makeSecure();
+		}
+
 		Session.start();
 
 		setupTables();
@@ -54,14 +61,6 @@ class Spider
 
 	public function generateSalt():String {
 		return "";
-	}
-
-	public function isAJAX():Bool {
-		return false;
-	}
-
-	public function isSecure():Bool {
-		return false;
 	}
 
 	public function makeSecure():Void {
@@ -102,5 +101,17 @@ class Spider
 
 	private static function get_IP():String {
 		return Web.getClientIP();
+	}
+
+	private static function get_secure():Bool {
+		return false;
+	}
+
+	private static function get_AJAX():Bool {
+		return false;
+	}
+
+	private static function get_loggedIn():Bool {
+		return false;
 	}
 }
