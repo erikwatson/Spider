@@ -7,6 +7,7 @@ class Spider
 {
 
 	public var config:Config = new Config();
+	public var log:Log = new Log();
 
 	public var routes:RouteCollection = new RouteCollection();
 
@@ -37,6 +38,8 @@ class Spider
 		routes.run(url);
 
 		Session.close();
+
+		log.write();
 	}
 
 	public function redirectToHome():Void {
