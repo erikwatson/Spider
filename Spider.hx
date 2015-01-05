@@ -5,11 +5,9 @@ import php.Session;
 
 class Spider
 {
-
-	public var config:Config = new Config();
-	public var log:Log = new Log();
-
 	public var routes:RouteCollection = new RouteCollection();
+
+	private var database:DB = new DB();
 
 	public static var IP(get, null):String;
 	public static var URI(get, null):String;
@@ -28,34 +26,40 @@ class Spider
 	}
 
 	public function run(url:String):Void {
-		if(config.sitewideSSL == true && secure == false) {
+		if(Config.sitewideSSL == true && secure == false) {
 			makeSecure();
 		}
 
 		Session.start();
+
+		database.connect();
 
 		setupTables();
 		routes.run(url);
 
 		Session.close();
 
-		log.write();
+		Log.sayIt();
 	}
 
 	public function redirectToHome():Void {
-		Web.redirect(config.homeURL);
+		Web.redirect(Config.homeURL);
 	}
 
 	public function redirectToLost():Void {
-		Web.redirect(config.lostURL);
+		Web.redirect(Config.lostURL);
 	}
 
 	public function redirectToLogin():Void {
-		Web.redirect(config.loginURL);
+		Web.redirect(Config.loginURL);
 	}
 
-	public function redirectToLogour():Void {
-		Web.redirect(config.logoutURL);
+	public function redirectToLogout():Void {
+		Web.redirect(Config.logoutURL);
+	}
+
+	public function redirectToError():Void {
+		Web.redirect(Config.errorURL);
 	}
 
 	public function hashPassword(password:String, salt:String):String {

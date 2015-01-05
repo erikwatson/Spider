@@ -6,21 +6,20 @@ package spider;
 class Log
 {
 
-	private var output:String = "";
-	public var isEmpty(get, null):Bool;
+	private static var output:String = "";
+	private static var somethingToSay(get, null):Bool;
 
-	public function new(){
-		
-	}
-
-	public function add(message:String) {
+	public static function add(message:String) {
 
 	}
 
-	public function write():Void {
-		if(isEmpty == false){
+	public static function sayIt():Void {
+		if(somethingToSay){
 			// write the contents of output 
-			// to a log file in config.logLocation 
+			// to a log file in Config.logLocation 
+
+			// perhaps smarter to save in a database if available
+			// then output to file and clear the db every hour or so? 
 
 			// write to a different log file for every day 
 		}
@@ -30,7 +29,7 @@ class Log
 	 *	Getters and Setters
 	 */
 
-	private function get_isEmpty():Bool {
+	private static function get_somethingToSay():Bool {
 		return false;
 	}
 }

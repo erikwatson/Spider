@@ -2,39 +2,37 @@ package spider;
 
 class Config
 {
-	public var sitewideSSL:Bool = false;
+	public static var sitewideSSL:Bool = false;
 
 	// Database Options 
-	public var dbType:DBType;
+	public static var dbType:DBType;
 
-	public var dbHost:String;
-	public var dbPort:String;
-	public var dbName:String = "spider"; // used by MySQL and SQLite3
-	public var dbSocket:String;
-	public var dbUser:String;
-	public var dbPass:String;
+	public static var dbHost:String;
+	public static var dbPort:Int;
+	public static var dbName:String = "spider"; // used by MySQL and SQLite3
+	public static var dbSocket:String;
+	public static var dbUser:String;
+	public static var dbPass:String;
 
 	// Important Locations 
-	public var dbLocation:String = "../protected/assets/data/";
-	public var templatesLocation:String = "../protected/assets/templates/";
-	public var logLocation:String = "../protected/assets/logs/";
+	public static var dbLocation:String = "../protected/assets/data/";
+	public static var templatesLocation:String = "../protected/assets/templates/";
+	public static var logLocation:String = "../protected/assets/logs/";
 
 	// Common Redirects 
-	public var homeURL:String = "/";
-	public var lostURL:String = "/lost";
-	public var loginURL:String = "/login";
-	public var logoutURL:String = "/logout";
+	public static var homeURL:String = "/";
+	public static var lostURL:String = "/lost";
+	public static var loginURL:String = "/login";
+	public static var logoutURL:String = "/logout";
+	public static var errorURL:String = "/error";
 
 	// How many iterations should PBKDF2 work on new Passwords? 
-	public var passwordIterations:Int = 10000;
-
-	public function new(){
-		
-	}
+	public static var passwordIterations:Int = 10000;
 }
 
 enum DBType
 {
+	None;
 	MySQL;
 	SQLite3;
 }
