@@ -24,31 +24,26 @@ class DB
 	}
 
 	public function connect():Void {
+		if(!isConnected) {
 
-		try {
-			if(!isConnected) {
+			if(Config.dbType != null) {
+				switch (Config.dbType) {
+					case DBType.MySQL:
+						connectMySQL();
+						Manager.cnx = dbConnect;
+						Manager.initialize();
+						
+					case DBType.SQLite3:
+						connectSQLite();
+						Manager.cnx = dbConnect;
+						Manager.initialize();
 
-				if(Config.dbType != null) {
-					switch (Config.dbType) {
-						case DBType.MySQL:
-							connectMySQL();
-							Manager.cnx = dbConnect;
-							Manager.initialize();
-
-						case DBType.SQLite3:
-							connectSQLite();
-							Manager.cnx = dbConnect;
-							Manager.initialize();
-
-						default:
-							Log.add("**Error:** Unexpected DB Type.");
-					}
-				} else {
-					Log.add("**Error:** DB Type can not be null.");
+					default:
+						Log.add("**Error:** Unexpected DB Type.");
 				}
+			} else {
+				Log.add("**Error:** DB Type can not be null.");
 			}
-		} catch(e:String) {
-			trace(e);
 		}
 	}
 
