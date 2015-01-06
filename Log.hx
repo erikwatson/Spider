@@ -3,6 +3,7 @@ package spider;
 import spider.Config;
 import sys.io.File;
 import sys.FileSystem;
+import sys.io.FileOutput;
 
 // Easily output Error messages, etc to a log file
 // Might be cool to have it expect Markdown, so we can make a nice on-site log viewer. 
@@ -19,16 +20,14 @@ class Log
 		messageOutput += Date.now().toString();
 		messageOutput += ": ";
 		messageOutput += message;
-		messageOutput += "\n";
+		messageOutput += "\n \n";
 
 		output += messageOutput;
 	}
 
+	// TODO: Clean this up a bit 
 	public static function sayIt():Void {
-		Log.add("Error: Test Message");
-		Log.add("Error: Test Message2");
-
-		if(somethingToSay){
+		if(somethingToSay == true && Config.logging == true){
 
 			// write to a different log file for every day 
 			var day:Int;
@@ -66,18 +65,17 @@ class Log
 
 			filePath += fileExtension;
 
+			var file;
+
 			if(FileSystem.exists(filePath)) {
-				//trace("Yup");
+				file = File.append(filePath, false);
 			} else {
-				//trace("Nope");
+				file = File.write(filePath, false);
 			}
 
-			// if a File already exists at filePath then open it
-			// otherwise, make a new File there
+			file.writeString(output);
 
-			// change the File contents
-
-			// save the file 
+			file.close();
 
 			output = "";
 		}

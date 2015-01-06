@@ -13,6 +13,8 @@ class Spider
 
 	private var database:DB = new DB();
 
+	public var setupTables:Void->Void;
+
 	public static var IP(get, null):String;
 	public static var URI(get, null):String;
 	public static var method(get, null):String;
@@ -22,11 +24,6 @@ class Spider
 
 	public function new(){
 		
-	}
-
-	// override this before you call run() 
-	public function setupTables():Void {
-
 	}
 
 	public function run(url:String):Void {
@@ -40,9 +37,14 @@ class Spider
 
 		if(Config.dbType != DBType.None) {
 			database.connect();
+
+			if(setupTables != null){
+				setupTables();
+			} else {
+				Log.add("Error: setupTables can not be null!");
+			}
 		}
 
-		setupTables();
 		routes.run(url);
 
 		if(Config.dbType != DBType.None) {

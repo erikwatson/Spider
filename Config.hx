@@ -16,16 +16,16 @@ class Config
 	public static var dbPass:String;
 
 	// Important Locations 
-	public static inline var dbLocation:String = "../protected/assets/data/";
-	public static inline var templatesLocation:String = "../protected/assets/templates/";
-	public static inline var logLocation:String = "../protected/assets/logs/";
+	public static var dbLocation:String = "../protected/assets/data/";
+	public static var templatesLocation:String = "../protected/assets/templates/";
+	public static var logLocation:String = "../protected/assets/logs/";
 
 	// Common Redirects 
-	public static inline var homeURL:String = "/";
-	public static inline var lostURL:String = "/lost";
-	public static inline var loginURL:String = "/login";
-	public static inline var logoutURL:String = "/logout";
-	public static inline var errorURL:String = "/error";
+	public static var homeURL:String = "/";
+	public static var lostURL:String = "/lost";
+	public static var loginURL:String = "/login";
+	public static var logoutURL:String = "/logout";
+	public static var errorURL:String = "/error";
 
 	// How many iterations should PBKDF2 work on new Passwords? 
 	public static var passwordIterations:Int = 10000;
