@@ -41,10 +41,10 @@ class DB
 							Manager.initialize();
 
 						default:
-							Log.add("Error: Unecpected DB Type.");
+							Log.add("**Error:** Unecpected DB Type.");
 					}
 				} else {
-					Log.add("Error: DB Type can not be null.");
+					Log.add("**Error:** DB Type can not be null.");
 				}
 			}
 		} catch(e:String) {
@@ -54,7 +54,7 @@ class DB
 
 	private function connectMySQL():Void {
 		if(Config.dbHost == null || Config.dbPort == null || Config.dbUser == null || Config.dbPass == null || Config.dbName == null) {
-			Log.add("Error: There is a problem with your MySQL Connection settings.");
+			Log.add("**Error:** There is a problem with your MySQL Connection settings.");
 		} else {
 			dbConnect = sys.db.Mysql.connect(
 				{
@@ -78,7 +78,7 @@ class DB
 		path += ".db";
 
 		if(path == null) {
-			throw "Error: Database Connection Error!";
+			throw "**Error:** Database Connection Error!";
 		} else {
 			dbConnect = sys.db.Sqlite.open(path);
 			isConnected = true;

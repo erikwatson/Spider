@@ -6,10 +6,13 @@ import php.Web;
 import php.Session;
 
 import spider.Config.DBType;
+import spider.Request;
 
 class Spider
 {
 	public var routes:RouteCollection = new RouteCollection();
+
+	public static var request:Request = new Request();
 
 	private var database:DB = new DB();
 
@@ -41,7 +44,7 @@ class Spider
 			if(setupTables != null){
 				setupTables();
 			} else {
-				Log.add("Error: setupTables can not be null!");
+				Log.add("**Error:** setupTables can not be null!");
 			}
 		}
 
