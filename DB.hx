@@ -41,7 +41,7 @@ class DB
 							Manager.initialize();
 
 						default:
-							Log.add("**Error:** Unecpected DB Type.");
+							Log.add("**Error:** Unexpected DB Type.");
 					}
 				} else {
 					Log.add("**Error:** DB Type can not be null.");
