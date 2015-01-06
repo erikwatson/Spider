@@ -12,17 +12,13 @@ class Spider
 {
 	public var routes:RouteCollection = new RouteCollection();
 
-	public static var request:Request = new Request();
+	public static var request:Request;
 
 	private var database:DB = new DB();
 
 	public var setupTables:Void->Void;
 
-	public static var IP(get, null):String;
-	public static var URI(get, null):String;
-	public static var method(get, null):String;
 	public static var secure(get, null):Bool;
-	public static var AJAX(get, null):Bool;
 	public static var loggedIn(get, null):Bool;
 
 	public function new(){
@@ -30,10 +26,14 @@ class Spider
 	}
 
 	public function run(url:String):Void {
+		// SSL is important, do this first! 
 		if(Config.sitewideSSL == true && secure == false) {
 			makeSecure();
 		}
 
+		request = new Request();
+
+		// probably shouldn't be running this on every request? 
 		createDirectories();
 
 		Session.start();
@@ -110,27 +110,11 @@ class Spider
 	 * 	Getters and Setters 
 	 */
 
-	private static function get_URI():String {
-		return Web.getURI();
-	}
-
-	private static function get_method():String {
-		return Web.getMethod();
-	}
-
-	private static function get_IP():String {
-		return Web.getClientIP();
+	private static function get_loggedIn():Bool {
+		return false;
 	}
 
 	private static function get_secure():Bool {
-		return false;
-	}
-
-	private static function get_AJAX():Bool {
-		return false;
-	}
-
-	private static function get_loggedIn():Bool {
 		return false;
 	}
 }

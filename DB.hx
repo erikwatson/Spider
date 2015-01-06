@@ -7,6 +7,7 @@ import sys.db.Manager;
 
 // php stuff
 import php.db.PDO;
+import php.Web;
 
 import spider.Config;
 import spider.Log;
@@ -24,6 +25,7 @@ class DB
 	}
 
 	public function connect():Void {
+
 		if(!isConnected) {
 
 			if(Config.dbType != null) {
