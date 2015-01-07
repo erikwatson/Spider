@@ -1,9 +1,11 @@
 package spider;
 
-import spider.Config;
 import sys.io.File;
 import sys.FileSystem;
 import sys.io.FileOutput;
+
+import spider.Spider;
+import spider.Config;
 
 // Easily output Error messages, etc to a log file
 // Might be cool to have it expect Markdown, so we can make a nice on-site log viewer. 
@@ -17,7 +19,7 @@ class Log
 	public static function add(message:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Date.now().toString();
+		messageOutput += Spider.request.timeOfRequest.toString();
 		messageOutput += ": ";
 		messageOutput += message;
 		messageOutput += "\n \n";

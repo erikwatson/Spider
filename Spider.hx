@@ -74,37 +74,11 @@ class Spider
 		}
 	}
 
-	public function hashPassword(password:String, salt:String):String {
-		return "";
-	}
-
-	public function generateSalt():String {
-		return "";
-	}
-
-	public function makeSecure():Void {
+	public static function makeSecure():Void {
 
 	}
 
-	public function sendEmails(emails:Map<String, String>):Void {
-		
-	}
-
-	public function sendEmail(address:String, message:String):Void {
-
-	}
-
-	public function isIPAddress(address:String):Bool {
-		return false;
-	}
-
-	public function isEmail(email:String):Bool {
-		return false;
-	}
-
-	public function isURL(url:String):Bool {
-		return false;
-	}
+	
 
 	/*
 	 * 	Getters and Setters 

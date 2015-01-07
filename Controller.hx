@@ -4,6 +4,8 @@ import haxe.web.Dispatch;
 import php.Lib;
 import php.Web;
 
+import spider.Spider;
+
 class Controller
 {
 	public function new(){
@@ -36,5 +38,10 @@ class Controller
 
 	public function redirectToError():Void {
 		Web.redirect(Config.errorURL);
+	}
+
+	// minor convenience function
+	private function makeSecure():Void {
+		Spider.makeSecure();
 	}
 }

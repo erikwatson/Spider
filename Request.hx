@@ -1,7 +1,8 @@
 package spider;
 
-import php.Web;
 import haxe.ds.StringMap;
+
+import php.Web;
 
 // A place to access all of the information about the current page request 
 
