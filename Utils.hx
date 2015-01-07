@@ -4,6 +4,10 @@ package spider;
 
 class Utils
 {
+	public static function doPasswordsMatch(password:String, hash:String):Bool {
+		return false;
+	}
+
 	public static function hashPassword(password:String, salt:String):String {
 		return "";
 	}

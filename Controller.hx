@@ -8,6 +8,9 @@ import spider.Spider;
 
 class Controller
 {
+
+	private var pageTitle:String = "";
+
 	public function new(){
 		
 	}
@@ -38,6 +41,14 @@ class Controller
 
 	public function redirectToError():Void {
 		Web.redirect(Config.errorURL);
+	}
+
+	public function pageHead():String {
+		return "";
+	}
+
+	public function pageFoot():String {
+		return "";
 	}
 
 	// minor convenience function

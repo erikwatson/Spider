@@ -21,17 +21,19 @@ class Spider
 	public static var secure(get, null):Bool;
 	public static var loggedIn(get, null):Bool;
 
+	// Might be a better way to do this, dunno 
+	public static inline var version:Float = 0.01;
+
 	public function new(){
 		
 	}
 
 	public function run(url:String):Void {
-		// SSL is important, do this first! 
-		if(Config.sitewideSSL == true && secure == false) {
+		request = new Request();
+
+		if(Config.sitewideSSL == true) {
 			makeSecure();
 		}
-
-		request = new Request();
 
 		// probably shouldn't be running this on every request? 
 		createDirectories();
@@ -75,7 +77,9 @@ class Spider
 	}
 
 	public static function makeSecure():Void {
-
+		if(!secure) {
+			Web.setHeader("Location", "https://" + request.host + request.URI);
+		}
 	}
 
 	
@@ -89,6 +93,10 @@ class Spider
 	}
 
 	private static function get_secure():Bool {
-		return false;
+		if(request.port == "443") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

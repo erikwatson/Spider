@@ -15,6 +15,7 @@ class Request
 	public var URI(get, null):String;
 	public var ajax(get, null):Bool;
 	public var IP(get, null):String;
+	public var port(get, null):String;
 	public var timeOfRequest(get, null):Date;
 	public var browser(get, null):String;
 	public var OS(get, null):String;
@@ -60,6 +61,10 @@ class Request
 
 	private function get_IP():String {
 		return Web.getClientIP();
+	}
+
+	public function get_port():String {
+		return untyped __var__('_SERVER', 'SERVER_PORT');
 	}
 
 	private function get_timeOfRequest():Date {
