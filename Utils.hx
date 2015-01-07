@@ -4,7 +4,7 @@ package spider;
 
 class Utils
 {
-	public static function doPasswordsMatch(password:String, hash:String):Bool {
+	public static function passwordsMatch(password:String, hash:String):Bool {
 		return false;
 	}
 

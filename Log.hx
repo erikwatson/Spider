@@ -29,7 +29,7 @@ class Log
 
 	// TODO: Clean this up a bit 
 	public static function sayIt():Void {
-		if(somethingToSay == true && Config.logging == true){
+		if(somethingToSay && Config.logging){
 
 			// write to a different log file for every day 
 			var day:Int;
