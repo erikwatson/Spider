@@ -18,7 +18,7 @@ class Config
 	// Important Locations 
 	public static var dbLocation:String = "../protected/assets/data/";
 	public static var templatesLocation:String = "../protected/assets/templates/";
-	public static var logLocation:String = "../protected/assets/logs/";
+	public static var logLocation:String = "../protected/logs/";
 
 	// Common Redirects 
 	public static var homeURL:String = "/";

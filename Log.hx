@@ -19,7 +19,7 @@ class Log
 	public static function add(message:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Spider.request.timeOfRequest.toString();
+		messageOutput += Spider.request.date.toString();
 		messageOutput += ": ";
 		messageOutput += message;
 		messageOutput += "\n \n";

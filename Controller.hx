@@ -52,6 +52,11 @@ class Controller
 	}
 
 	// minor convenience function
+	private function isSecure():Bool {
+		return Spider.secure;
+	}
+
+	// minor convenience function
 	private function makeSecure():Void {
 		Spider.makeSecure();
 	}

@@ -13,10 +13,10 @@ class Request
 	public var method(get, null):String;
 	public var params(get, null):StringMap<Int>;
 	public var URI(get, null):String;
-	public var ajax(get, null):Bool;
+	public var AJAX(get, null):Bool;
 	public var IP(get, null):String;
 	public var port(get, null):String;
-	public var timeOfRequest(get, null):Date;
+	public var date(get, null):Date;
 	public var browser(get, null):String;
 	public var OS(get, null):String;
 	public var language(get, null):String;
@@ -47,7 +47,7 @@ class Request
 		return Web.getURI();
 	}
 
-	private function get_ajax():Bool {
+	private function get_AJAX():Bool {
 		var result = false;
 
 		untyped __php__("
@@ -67,7 +67,7 @@ class Request
 		return untyped __var__('_SERVER', 'SERVER_PORT');
 	}
 
-	private function get_timeOfRequest():Date {
+	private function get_date():Date {
 		return now;
 	}
 
@@ -83,6 +83,7 @@ class Request
 
 	// TODO
 	private function get_language():String {
-		return "";
+		var lang:String = untyped __php__("$_SERVER['HTTP_ACCEPT_LANGUAGE']");
+		return lang.substr(0, 2);
 	}
 }
