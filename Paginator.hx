@@ -1,5 +1,8 @@
 package spider;
 
+// Draws a list of pages and a page full of items 
+// The page can be in List or Table format 
+
 class Paginator
 {
 
@@ -34,13 +37,13 @@ class Paginator
 		output += "<div class='paginator_nav'>\n";
 
 		output += "\t<div class = 'paginator_prev'>Back</div>\n";
-		output += "\t<ul> \n";
+		output += "\t<div class = 'paginator_list'><ul> \n";
 
 		for(i in 0...totalPages){
 			output += '\t\t<li>${data[i]}</li>\n';
 		}
 
-		output += "\t<ul> \n";
+		output += "\t<ul></div> \n";
 		output += "\t<div class = 'paginator_next'>Next</div>\n";
 
 		output += "</div>\n";
@@ -67,6 +70,7 @@ class Paginator
 		return output;
 	}
 
+	// Should use the Table Class 
 	private function drawTable():String {
 		return "";
 	}
