@@ -60,18 +60,5 @@ class Controller
 	private function makeSecure():Void {
 		Spider.makeSecure();
 	}
-
-	// not sure this should be in here
-	// maybe we should have views for stuff like this? 
-	private function drawTable(data:String = "Replace Me!"):String {
-		return "";
-	}
-
-	private function drawBreadcrumb():String {
-		return "";
-	}
-
-	private function drawPaginator():String {
-		return "";
-	}
+	
 }
