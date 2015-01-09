@@ -3,6 +3,8 @@ package spider;
 import haxe.web.Dispatch;
 import php.Lib;
 import php.Web;
+import haxe.Template;
+import sys.io.File;
 
 import spider.Spider;
 
@@ -19,7 +21,7 @@ class Controller
 		Lib.println("Index");
 	}
 
-	public function doDefault(d:Dispatch):Void {
+	public function doDefault():Void {
 		Lib.println("Default");
 	}
 
@@ -49,6 +51,13 @@ class Controller
 
 	public function pageFoot():String {
 		return "";
+	}
+
+	private function drawTemplate(path:String, options:Dynamic):String {
+		var s:String = File.getContent(path);
+		var t:Template = new Template(s);
+
+		return t.execute( options );
 	}
 
 	// minor convenience function

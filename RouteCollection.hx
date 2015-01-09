@@ -36,7 +36,7 @@ class RouteCollection
 			throw 'Error: Route $url does not exist.';
 		} else {
 			// run the route
-			Dispatch.run(url, new haxe.ds.StringMap(), new controllers.Fart());
+			Dispatch.run(url, new haxe.ds.StringMap(), new controllers.Home());
 		}
 	}
 }

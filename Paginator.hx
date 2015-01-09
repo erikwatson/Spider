@@ -37,13 +37,13 @@ class Paginator
 		output += "<div class='paginator_nav'>\n";
 
 		output += "\t<div class = 'paginator_prev'>Back</div>\n";
-		output += "\t<div class = 'paginator_list'><ul> \n";
+		output += "\t<div class = 'paginator_pages'><ul> \n";
 
 		for(i in 0...totalPages){
 			output += '\t\t<li>${data[i]}</li>\n';
 		}
 
-		output += "\t<ul></div> \n";
+		output += "\t</ul></div> \n";
 		output += "\t<div class = 'paginator_next'>Next</div>\n";
 
 		output += "</div>\n";
@@ -55,6 +55,7 @@ class Paginator
 		var output:String = "";
 		var position:Int = perPage * (currentPage - 1);
 
+		output += "<div class='paginator_list'> \n";
 		output += "<ul> \n";
 
 		for(i in position...position+perPage){
@@ -66,6 +67,7 @@ class Paginator
 		}
 
 		output += "</ul> \n";
+		output += "</div> \n";
 
 		return output;
 	}
