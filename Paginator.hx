@@ -40,7 +40,7 @@ class Paginator
 		output += "\t<div class = 'paginator_pages'><ul> \n";
 
 		for(i in 0...totalPages){
-			output += '\t\t<li>${data[i]}</li>\n';
+			output += '\t\t<li><a href="#">${i + 1}</a></li>\n';
 		}
 
 		output += "\t</ul></div> \n";
