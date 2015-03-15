@@ -41,6 +41,6 @@ class Breadcrumb
 	}
 
 	private function navList():Array<String> {
-		return Spider.request.URI.split("/");
+		return Request.URI.split("/");
 	}
 }

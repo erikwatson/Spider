@@ -8,13 +8,17 @@ import sys.io.File;
 
 import spider.Spider;
 
+// TODO: The Controller should look in a default location for its View 
+
 class Controller
 {
 
-	private var pageTitle:String = "";
+	private var pageTitle:String = ""; // Inserted into the title bar of the page 
+	private var name:String = ""; // Name of the current Controller
 
 	public function new(){
-		
+		var classParts = Type.getClassName(Type.getClass(this)).split(".");
+		name = classParts[classParts.length - 1].toLowerCase();
 	}
 
 	public function doIndex():Void {

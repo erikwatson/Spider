@@ -12,7 +12,7 @@ class Spider
 {
 	public var routes:RouteCollection = new RouteCollection();
 
-	public static var request:Request;
+	// public static var request:Request;
 
 	private var database:DB = new DB();
 
@@ -29,7 +29,8 @@ class Spider
 	}
 
 	public function run(url:String):Void {
-		request = new Request();
+
+		Request.start();
 
 		if(Config.sitewideSSL == true) {
 			makeSecure();
@@ -71,14 +72,14 @@ class Spider
 			FileSystem.createDirectory(Config.dbLocation);
 		}
 
-		if(!FileSystem.isDirectory(Config.templatesLocation)) {
-			FileSystem.createDirectory(Config.templatesLocation);
+		if(!FileSystem.isDirectory(Config.viewLocation)) {
+			FileSystem.createDirectory(Config.viewLocation);
 		}
 	}
 
 	public static function makeSecure():Void {
 		if(!secure) {
-			Web.setHeader("Location", "https://" + request.host + request.URI);
+			Web.setHeader("Location", "https://" + Request.host + Request.URI);
 		}
 	}
 
@@ -93,7 +94,7 @@ class Spider
 	}
 
 	private static function get_secure():Bool {
-		if(request.port == "443") {
+		if(Request.port == "443") {
 			return true;
 		} else {
 			return false;

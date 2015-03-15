@@ -9,21 +9,21 @@ import php.Web;
 class Request
 {
 
-	public var host(get, null):String;
-	public var method(get, null):String;
-	public var params(get, null):StringMap<Int>;
-	public var URI(get, null):String;
-	public var AJAX(get, null):Bool;
-	public var IP(get, null):String;
-	public var port(get, null):String;
-	public var date(get, null):Date;
-	public var browser(get, null):String;
-	public var OS(get, null):String;
-	public var language(get, null):String;
+	public static var host(get, null):String;
+	public static var method(get, null):String;
+	public static var params(get, null):StringMap<Int>;
+	public static var URI(get, null):String;
+	public static var AJAX(get, null):Bool;
+	public static var IP(get, null):String;
+	public static var port(get, null):String;
+	public static var date(get, null):Date;
+	public static var browser(get, null):String;
+	public static var OS(get, null):String;
+	public static var language(get, null):String;
 
-	private var now:Date;
+	private static var now:Date;
 
-	public function new(){
+	public static function start():Void {
 		now = Date.now();
 	}
 
@@ -31,23 +31,23 @@ class Request
 	 *	Getters & Setters 
 	 */
 
-	private function get_host():String {
+	private static function get_host():String {
 		return Web.getHostName();
 	}
 
-	private function get_method():String {
+	private static function get_method():String {
 		return Web.getMethod();
 	}
 
-	private function get_params():StringMap<Int> {
+	private static function get_params():StringMap<Int> {
 		return Web.getParams();
 	}
 
-	private function get_URI():String {
+	private static function get_URI():String {
 		return Web.getURI();
 	}
 
-	private function get_AJAX():Bool {
+	private static function get_AJAX():Bool {
 		var result = false;
 
 		untyped __php__("
@@ -59,30 +59,30 @@ class Request
 		return result;
 	}
 
-	private function get_IP():String {
+	private static function get_IP():String {
 		return Web.getClientIP();
 	}
 
-	public function get_port():String {
+	public static function get_port():String {
 		return untyped __var__('_SERVER', 'SERVER_PORT');
 	}
 
-	private function get_date():Date {
+	private static function get_date():Date {
 		return now;
 	}
 
 	// TODO
-	private function get_browser():String {
+	private static function get_browser():String {
 		return "";
 	}
 
 	// TODO
-	private function get_OS():String {
+	private static function get_OS():String {
 		return "";
 	}
 
 	// TODO
-	private function get_language():String {
+	private static function get_language():String {
 		var lang:String = untyped __php__("$_SERVER['HTTP_ACCEPT_LANGUAGE']");
 		return lang.substr(0, 2);
 	}

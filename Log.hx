@@ -19,7 +19,7 @@ class Log
 	public static function add(message:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Spider.request.date.toString();
+		messageOutput += getTime();
 		messageOutput += ": ";
 		messageOutput += message;
 		messageOutput += "\n \n";
@@ -31,40 +31,10 @@ class Log
 	public static function sayIt():Void {
 		if(somethingToSay && Config.logging){
 
-			// write to a different log file for every day 
-			var day:Int;
-			var month:Int;
-			var year:Int;
-
 			var filePath:String = '${Config.logLocation}';
 			var fileExtension:String = ".md";
 
-			day = Date.now().getDate();
-			month = Date.now().getMonth() + 1;
-			year = Date.now().getFullYear();
-
-			if(year < 10) {
-				filePath += '0$year';
-			} else {
-				filePath += '$year';
-			}
-
-			filePath += "-";
-
-			if(month < 10) {
-				filePath += '0$month';
-			} else {
-				filePath += '$month';
-			}
-
-			filePath += "-";
-
-			if(day < 10) {
-				filePath += '0$day';
-			} else {
-				filePath += '$day';
-			}
-
+			filePath += getUKDateFormat();
 			filePath += fileExtension;
 
 			var file;
@@ -81,6 +51,75 @@ class Log
 
 			output = "";
 		}
+	}
+
+	private static function getUKDateFormat():String {
+		var output = "";
+
+		var day:Int;
+		var month:Int;
+		var year:Int;
+
+		day = Date.now().getDate();
+		month = Date.now().getMonth() + 1;
+		year = Date.now().getFullYear();
+
+		if(day < 10) {
+			output += '0$day';
+		} else {
+			output += '$day';
+		}
+
+		output += "-";
+
+		if(month < 10) {
+			output += '0$month';
+		} else {
+			output += '$month';
+		}
+
+		output += "-";
+
+		if(year < 10) {
+			output += '0$year';
+		} else {
+			output += '$year';
+		}
+
+		return output;
+	}
+
+	private static function getTime():String {
+		var output = "";
+		var now = Date.now();
+
+		var hours;
+		var minutes;
+		var seconds;
+
+		if(now.getHours() < 10){
+			hours = '0${now.getHours()}';
+		} else {
+			hours = '${now.getHours()}';
+		}
+
+		if(now.getMinutes() < 10){
+			minutes = '0${now.getMinutes()}';
+		} else {
+			minutes = '${now.getMinutes()}';
+		}
+
+		if(now.getSeconds() < 10){
+			seconds = '0${now.getSeconds()}';
+		} else {
+			seconds = '${now.getSeconds()}';
+		}
+
+
+
+		output = '$hours:$minutes:$seconds';
+
+		return output;
 	}
 
 	/*
