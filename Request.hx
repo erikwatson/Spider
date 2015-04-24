@@ -13,7 +13,7 @@ class Request
 	public static var method(get, null):String;
 	public static var params(get, null):StringMap<Int>;
 	public static var URI(get, null):String;
-	public static var AJAX(get, null):Bool;
+	public static var isAJAX(get, null):Bool;
 	public static var IP(get, null):String;
 	public static var port(get, null):String;
 	public static var date(get, null):Date;
@@ -47,7 +47,7 @@ class Request
 		return Web.getURI();
 	}
 
-	private static function get_AJAX():Bool {
+	private static function get_isAJAX():Bool {
 		var result = false;
 
 		untyped __php__("

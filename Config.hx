@@ -2,7 +2,7 @@ package spider;
 
 class Config
 {
-	public static var siteName:String = "Spider Web";
+	public static inline var siteName:String = "Spider Web";
 
 	public static var sitewideSSL:Bool = false;
 	public static var logging:Bool = true;
@@ -18,19 +18,22 @@ class Config
 	public static var dbPass:String;
 
 	// Important Locations 
-	public static var dbLocation:String = "../protected/data/";
-	public static var viewLocation:String = "../protected/views/";
-	public static var logLocation:String = "../protected/logs/";
+	public static inline var dbLocation:String = "../private/data/"; // used by SQLite Only 
+	public static inline var viewLocation:String = "../private/views/";
+	public static inline var logLocation:String = "../private/logs/";
 
 	// Common Redirects 
-	public static var homeURL:String = "/";
-	public static var lostURL:String = "/lost/";
-	public static var loginURL:String = "/login/";
-	public static var logoutURL:String = "/logout/";
-	public static var errorURL:String = "/error/";
+	public static inline var homeURL:String = "/";
+	public static inline var lostURL:String = "/lost/";
+	public static inline var loginURL:String = "/login/";
+	public static inline var logoutURL:String = "/logout/";
+	public static inline var errorURL:String = "/error/";
 
 	// How many iterations should PBKDF2 work on new Passwords? 
 	public static var passwordIterations:Int = 10000;
+
+	// Session variable names
+	public static inline var isLoggedIn:String = "is_logged_in";
 }
 
 enum DBType

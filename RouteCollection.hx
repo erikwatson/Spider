@@ -3,7 +3,9 @@ package spider;
 import haxe.web.Dispatch;
 
 typedef Route = {
+
 	public var controller : Class<Controller>;
+	public var action : String;
 }
 
 class RouteCollection
@@ -36,7 +38,7 @@ class RouteCollection
 			throw 'Error: Route $url does not exist.';
 		} else {
 			// run the route
-			Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.Home());
+			Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 		}
 	}
 }

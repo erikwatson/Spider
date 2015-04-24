@@ -21,32 +21,28 @@ class Controller
 		name = classParts[classParts.length - 1].toLowerCase();
 	}
 
-	public function doIndex():Void {
+	public function index():Void {
 		Lib.println("Index");
 	}
 
-	public function doDefault():Void {
-		Lib.println("Default");
+	public inline function redirectToHome():Void {
+		Spider.redirect(Config.homeURL);
 	}
 
-	public function redirectToHome():Void {
-		Web.redirect(Config.homeURL);
+	public inline function redirectToLost():Void {
+		Spider.redirect(Config.lostURL);
 	}
 
-	public function redirectToLost():Void {
-		Web.redirect(Config.lostURL);
+	public inline function redirectToLogin():Void {
+		Spider.redirect(Config.loginURL);
 	}
 
-	public function redirectToLogin():Void {
-		Web.redirect(Config.loginURL);
+	public inline function redirectToLogout():Void {
+		Spider.redirect(Config.logoutURL);
 	}
 
-	public function redirectToLogout():Void {
-		Web.redirect(Config.logoutURL);
-	}
-
-	public function redirectToError():Void {
-		Web.redirect(Config.errorURL);
+	public inline function redirectToError():Void {
+		Spider.redirect(Config.errorURL);
 	}
 
 	public function pageHead():String {
@@ -57,7 +53,7 @@ class Controller
 		return "";
 	}
 
-	private function drawTemplate(path:String, options:Dynamic):String {
+	private function drawTemplate(path:String, options:{}):String {
 		var s:String = File.getContent(path);
 		var t:Template = new Template(s);
 
@@ -65,13 +61,18 @@ class Controller
 	}
 
 	// minor convenience function
-	private function isSecure():Bool {
+	private inline function isSecure():Bool {
 		return Spider.secure;
 	}
 
 	// minor convenience function
-	private function makeSecure():Void {
+	private inline function makeSecure():Void {
 		Spider.makeSecure();
+	}
+
+	// minor convenience function
+	private inline function redirect(url:String):Void {
+		Spider.redirect(url);
 	}
 	
 }

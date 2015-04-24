@@ -16,7 +16,7 @@ Don't bother yet. Very much a work in progress / learning exercise.
 
 ## License
 
-This is [free software](https://www.gnu.org/philosophy/free-sw.html) made available under the MIT License.
+This is [free software](https://www.gnu.org/philosophy/free-sw.html) made available under the GNU GPL V3 Licence.
 
 
 ## Who do I talk to?

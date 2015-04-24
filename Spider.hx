@@ -36,9 +36,6 @@ class Spider
 			makeSecure();
 		}
 
-		// probably shouldn't be running this on every request? 
-		createDirectories();
-
 		Session.start();
 
 		if(Config.dbType != DBType.None) {
@@ -62,25 +59,16 @@ class Spider
 		Log.sayIt();
 	}
 
-	// create the directory structure if it doesn't already exist 
-	private function createDirectories():Void {
-		if(!FileSystem.isDirectory(Config.logLocation)) {
-			FileSystem.createDirectory(Config.logLocation);
-		}
-
-		if(!FileSystem.isDirectory(Config.dbLocation)) {
-			FileSystem.createDirectory(Config.dbLocation);
-		}
-
-		if(!FileSystem.isDirectory(Config.viewLocation)) {
-			FileSystem.createDirectory(Config.viewLocation);
-		}
-	}
-
 	public static function makeSecure():Void {
 		if(!secure) {
 			Web.setHeader("Location", "https://" + Request.host + Request.URI);
 		}
+	}
+
+	// A redirect that halts execution
+	public static function redirect(url:String):Void {
+		Web.redirect(url);
+		Sys.exit(0);
 	}
 
 	
