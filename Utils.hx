@@ -44,4 +44,13 @@ class Utils
 
 		return output;
 	}
+
+	public static function firstCharToLower(text:String):String {
+		var output = "";
+
+		output += text.charAt(0).toLowerCase();
+		output += text.substr(1);
+
+		return output;
+	}
 }

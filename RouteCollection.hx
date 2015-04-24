@@ -33,12 +33,25 @@ class RouteCollection
 		}
 	}
 
+	public function get(url:String) {
+		if(!routes.exists(url)) {
+			throw 'Error: Route $url does not exist.';
+		} else {
+			return routes.get(url);
+		}
+	}
+
 	public function run(url:String):Void {
 		if(!routes.exists(url)) {
 			throw 'Error: Route $url does not exist.';
 		} else {
+			// get the route that matches the url
+			var r = get(url);
+
 			// run the route
 			Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 		}
+
+		// Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 	}
 }

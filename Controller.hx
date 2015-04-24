@@ -1,10 +1,11 @@
 package spider;
 
-import haxe.web.Dispatch;
 import php.Lib;
 import php.Web;
 import haxe.Template;
 import sys.io.File;
+import haxe.Json;
+import haxe.PosInfos;
 
 import spider.Spider;
 
@@ -13,12 +14,15 @@ import spider.Spider;
 class Controller
 {
 
+	private var header:Header;
+
 	private var pageTitle:String = ""; // Inserted into the title bar of the page 
 	private var name:String = ""; // Name of the current Controller
 
 	public function new(){
 		var classParts = Type.getClassName(Type.getClass(this)).split(".");
 		name = classParts[classParts.length - 1].toLowerCase();
+		header = new Header();
 	}
 
 	public function index():Void {
@@ -74,5 +78,22 @@ class Controller
 	private inline function redirect(url:String):Void {
 		Spider.redirect(url);
 	}
-	
+
+	// draw the current view with these properties
+	private function view(obj:{}, ?pos:PosInfos) {
+		// figure out the location of the template
+		var simpleName = StringTools.replace(name, "controller", "");
+		var simpleMethod = Utils.firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
+		var viewPath = '${Config.viewLocation}${simpleName}/${simpleMethod}.mtt';
+
+		trace(viewPath);
+
+		// execute the template with the properties object
+	}
+
+	// output this object as a json file 
+	private function json(obj:{}) {
+		header.set(Header.contentType, Header.json);
+		Lib.print(Json.stringify(obj));
+	}	
 }
