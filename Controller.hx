@@ -9,52 +9,40 @@ import haxe.PosInfos;
 
 import spider.Spider;
 
-// TODO: The Controller should look in a default location for its View 
-
 class Controller
 {
 
+	private var pageTitle:String = "";
+	private var name(get, null):String;
+	private var forceSSL(default, set):Bool = false; // for this whole controller 
+
 	private var header:Header;
 
-	private var pageTitle:String = ""; // Inserted into the title bar of the page 
-	private var name:String = ""; // Name of the current Controller
+	// TODO: use this for session variables that should ONLY be available on the next request 
+	private var flash:Map<String, Dynamic>; 
 
 	public function new(){
-		var classParts = Type.getClassName(Type.getClass(this)).split(".");
-		name = classParts[classParts.length - 1].toLowerCase();
 		header = new Header();
 	}
 
-	public function index():Void {
-		Lib.println("Index");
-	}
-
 	public inline function redirectToHome():Void {
-		Spider.redirect(Config.homeURL);
+		Spider.url = Config.homeURL;
 	}
 
 	public inline function redirectToLost():Void {
-		Spider.redirect(Config.lostURL);
+		Spider.url = Config.lostURL;
 	}
 
 	public inline function redirectToLogin():Void {
-		Spider.redirect(Config.loginURL);
+		Spider.url = Config.loginURL;
 	}
 
 	public inline function redirectToLogout():Void {
-		Spider.redirect(Config.logoutURL);
+		Spider.url = Config.logoutURL;
 	}
 
 	public inline function redirectToError():Void {
-		Spider.redirect(Config.errorURL);
-	}
-
-	public function pageHead():String {
-		return "";
-	}
-
-	public function pageFoot():String {
-		return "";
+		Spider.url = Config.errorURL;
 	}
 
 	private function drawTemplate(path:String, options:{}):String {
@@ -62,6 +50,10 @@ class Controller
 		var t:Template = new Template(s);
 
 		return t.execute( options );
+	}
+
+	private function login(username:String, password:String):Void {
+		// TODO 
 	}
 
 	// minor convenience function
@@ -76,7 +68,7 @@ class Controller
 
 	// minor convenience function
 	private inline function redirect(url:String):Void {
-		Spider.redirect(url);
+		Spider.url = url;
 	}
 
 	// draw the current view with these properties
@@ -86,14 +78,54 @@ class Controller
 		var simpleMethod = Utils.firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
 		var viewPath = '${Config.viewLocation}${simpleName}/${simpleMethod}.mtt';
 
-		trace(viewPath);
+		// try to execute the template
+		try {
+			var f = File.getContent(viewPath);
+			var t = new Template(f);
 
-		// execute the template with the properties object
+			Lib.print(t.execute(obj));
+		} catch(e:String) {
+			Lib.print('No Template found at $viewPath.');
+		}
 	}
 
 	// output this object as a json file 
 	private function json(obj:{}) {
 		header.set(Header.contentType, Header.json);
 		Lib.print(Json.stringify(obj));
-	}	
+	}
+
+	// output this object as an xml file 
+	private function xml(obj:{}) {
+		header.set(Header.contentType, Header.xml);
+		// TODO
+	}
+
+	// output this object as an atom feed 
+	private function atom(obj:{}) {
+		header.set(Header.contentType, Header.atom);
+		// TODO
+	}
+
+	// output this object as an rss feed 
+	private function rss(obj:{}) {
+		header.set(Header.contentType, Header.rss);
+		// TODO
+	}
+
+
+	// Getters and Setters 
+
+	private function set_forceSSL(ssl:Bool):Bool {
+		if(ssl) {
+			Spider.makeSecure();
+		}
+
+		return ssl;
+	}
+
+	private function get_name():String {
+		var classParts = Type.getClassName(Type.getClass(this)).split(".");
+		return classParts[classParts.length - 1].toLowerCase();
+	}
 }

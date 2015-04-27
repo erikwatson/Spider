@@ -20,6 +20,7 @@ class Request
 	public static var browser(get, null):String;
 	public static var OS(get, null):String;
 	public static var language(get, null):String;
+	// public static var headers(get, null):String;
 
 	private static var now:Date;
 

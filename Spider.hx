@@ -2,6 +2,8 @@ package spider;
 
 import sys.FileSystem;
 
+import haxe.web.Dispatch;
+
 import php.Web;
 import php.Session;
 
@@ -10,9 +12,8 @@ import spider.Request;
 
 class Spider
 {
-	public var routes:RouteCollection = new RouteCollection();
 
-	// public static var request:Request;
+	public static var url(get, set):String;
 
 	private var database:DB = new DB();
 
@@ -29,15 +30,15 @@ class Spider
 	}
 
 	public function run(url:String):Void {
-
+		Session.start();
 		Request.start();
 
-		if(Config.sitewideSSL == true) {
+		// enforce ssl requirement
+		if(Config.sitewideSSL) {
 			makeSecure();
 		}
 
-		Session.start();
-
+		// connect to and optionally set up the database 
 		if(Config.dbType != DBType.None) {
 			database.connect();
 
@@ -48,44 +49,59 @@ class Spider
 			}
 		}
 
-		routes.run(url);
+		// run the current route 
+		Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 
+		// close stuff
 		if(Config.dbType != DBType.None) {
 			database.close();
 		}
 
 		Session.close();
 
+		// output messages to the Log 
 		Log.sayIt();
 	}
 
 	public static function makeSecure():Void {
 		if(!secure) {
 			Web.setHeader("Location", "https://" + Request.host + Request.URI);
+			Sys.exit(0);
 		}
 	}
-
-	// A redirect that halts execution
-	public static function redirect(url:String):Void {
-		Web.redirect(url);
-		Sys.exit(0);
-	}
-
 	
 
-	/*
-	 * 	Getters and Setters 
-	 */
+
+	// Getters and Setters 
 
 	private static function get_loggedIn():Bool {
-		return false;
+		var loggedIn = true;
+		var sv = Session.get(Config.isLoggedIn);
+
+		if(sv != true){
+			loggedIn = false;
+		}
+
+		return loggedIn;
 	}
 
+	// TODO: This isn't reliable
 	private static function get_secure():Bool {
 		if(Request.port == "443") {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	private static function get_url():String {
+		return Web.getURI();
+	}
+
+	private static function set_url(url:String):String {
+		Web.redirect(url);
+		Sys.exit(0);
+
+		return url;
 	}
 }
