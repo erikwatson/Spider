@@ -41,6 +41,9 @@ public function new() {
 
 private function setupTables() {
 	// create your tables with the SPOD models here 
+	if(!TableCreate.exists(User.manager)) {
+		TableCreate.create(User.manager);
+	}
 }
 ```
 
