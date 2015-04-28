@@ -26,23 +26,23 @@ class Controller
 	}
 
 	public inline function redirectToHome():Void {
-		Spider.url = Config.homeURL;
+		Spider.url = Spider.config.homeURL;
 	}
 
 	public inline function redirectToLost():Void {
-		Spider.url = Config.lostURL;
+		Spider.url = Spider.config.lostURL;
 	}
 
 	public inline function redirectToLogin():Void {
-		Spider.url = Config.loginURL;
+		Spider.url = Spider.config.loginURL;
 	}
 
 	public inline function redirectToLogout():Void {
-		Spider.url = Config.logoutURL;
+		Spider.url = Spider.config.logoutURL;
 	}
 
 	public inline function redirectToError():Void {
-		Spider.url = Config.errorURL;
+		Spider.url = Spider.config.errorURL;
 	}
 
 	private function drawTemplate(path:String, options:{}):String {
@@ -76,7 +76,7 @@ class Controller
 		// figure out the location of the template
 		var simpleName = StringTools.replace(name, "controller", "");
 		var simpleMethod = Utils.firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
-		var viewPath = '${Config.viewLocation}${simpleName}/${simpleMethod}.mtt';
+		var viewPath = '${Spider.config.viewLocation}${simpleName}/${simpleMethod}.mtt';
 
 		// try to execute the template
 		try {

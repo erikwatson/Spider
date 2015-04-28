@@ -29,9 +29,9 @@ class Log
 
 	// TODO: Clean this up a bit 
 	public static function sayIt():Void {
-		if(somethingToSay && Config.logging){
+		if(somethingToSay && Spider.config.logging){
 
-			var filePath:String = '${Config.logLocation}';
+			var filePath:String = '${Spider.config.logLocation}';
 			var fileExtension:String = ".md";
 
 			filePath += getUKDateFormat();

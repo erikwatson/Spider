@@ -13,10 +13,11 @@ import spider.Request;
 class Spider
 {
 
+	public static var config:Config = new Config();
+
 	public static var url(get, set):String;
 
 	private var database:DB = new DB();
-
 	public var setupTables:Void->Void;
 
 	public static var secure(get, null):Bool;
@@ -34,12 +35,12 @@ class Spider
 		Request.start();
 
 		// enforce ssl requirement
-		if(Config.sitewideSSL) {
+		if(config.sitewideSSL) {
 			makeSecure();
 		}
 
 		// connect to and optionally set up the database 
-		if(Config.dbType != DBType.None) {
+		if(config.dbType != DBType.None) {
 			database.connect();
 
 			if(setupTables != null){
@@ -53,7 +54,7 @@ class Spider
 		Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 
 		// close stuff
-		if(Config.dbType != DBType.None) {
+		if(config.dbType != DBType.None) {
 			database.close();
 		}
 
@@ -65,7 +66,7 @@ class Spider
 
 	public static function makeSecure():Void {
 		if(!secure) {
-			Web.setHeader("Location", "https://" + Request.host + Request.URI);
+			Web.setHeader("Location", "https://" + Request.host + url);
 			Sys.exit(0);
 		}
 	}
@@ -76,7 +77,7 @@ class Spider
 
 	private static function get_loggedIn():Bool {
 		var loggedIn = true;
-		var sv = Session.get(Config.isLoggedIn);
+		var sv = Session.get(Spider.config.isLoggedIn);
 
 		if(sv != true){
 			loggedIn = false;
