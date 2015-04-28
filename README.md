@@ -26,14 +26,16 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 
 Don't bother yet. Very much a work in progress / learning exercise. 
 
-```Haxe
+```haxe
 public function new() {
-	var site = new Spider();
-	site.setupTables = setupTables;
+	var site = new Spider({
+		// config options 
+		siteName : "My Awesome Site!",
+		setupTables : setupTables
+	});
 
 	site.run("/");
 }
-
 
 private function setupTables() {
 	// create your tables with the SPOD models here 
