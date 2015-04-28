@@ -56,6 +56,8 @@ class Log
 		output += messageOutput;
 
 		sayIt();
+
+		throw messageOutput;
 	}
 
 	// TODO: Clean this up a bit 

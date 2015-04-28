@@ -6,9 +6,12 @@ import haxe.web.Dispatch;
 
 import php.Web;
 import php.Session;
+import php.Lib;
 
 import spider.Config.DBType;
 import spider.Request;
+import spider.options.SpiderOptions;
+import spider.Log;
 
 class Spider
 {
@@ -26,8 +29,50 @@ class Spider
 	// Might be a better way to do this, dunno 
 	public static inline var version:Float = 0.01;
 
-	public function new(options:{}){
-		
+	public function new(options:SpiderOptions) {
+		try {
+
+			if(options.dbType == DBType.MySQL) {
+				if (options.dbName == null || 
+					options.dbHost == null ||
+					options.dbPass == null ||
+					options.dbPort == null ||
+					options.dbSocket == null ||
+					options.dbUser == null) 
+				{
+					Log.error("Some MySQL options are missing.");
+				} else {
+					config.dbName = options.dbName;
+					config.dbHost = options.dbHost;
+					config.dbPass = options.dbPass;
+					config.dbPort = options.dbPort;
+					config.dbSocket = options.dbSocket;
+					config.dbUser = options.dbUser;
+				}
+			}
+
+			if(options.dbType == DBType.SQLite3) {
+				if(options.dbName == null){
+					Log.error("Must set a dbName when using SQLite3.");
+				} else {
+					config.dbName = options.dbName;
+				}
+
+				if(options.setupTables == null){
+					Log.error("Must have a setupTables function when using a database.");
+				} else {
+					setupTables = options.setupTables;
+				}
+			}
+
+			if(options.dbType == DBType.None) {
+				
+			}
+
+		} catch(e:String) {
+			Lib.println('$e <br />');
+			Sys.exit(1);
+		}
 	}
 
 	public function run(url:String):Void {
