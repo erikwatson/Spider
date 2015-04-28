@@ -25,10 +25,12 @@ class Log
 		messageOutput += "\n \n";
 
 		output += messageOutput;
+
+		sayIt();
 	}
 
 	// TODO: Clean this up a bit 
-	public static function sayIt():Void {
+	private static function sayIt():Void {
 		if(somethingToSay && Spider.config.logging){
 
 			var filePath:String = '${Spider.config.logLocation}';

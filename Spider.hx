@@ -59,9 +59,6 @@ class Spider
 		}
 
 		Session.close();
-
-		// output messages to the Log 
-		Log.sayIt();
 	}
 
 	public static function makeSecure():Void {
