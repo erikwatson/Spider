@@ -4,6 +4,17 @@ Spider
 Spider is a tiny web framework for Haxe targeting PHP.
 
 
+## Features
+
+* Clearn URLs and URL Routing.
+* MySQL or SQLite3 database connectivity and modeling. 
+* Templates.
+* Error logging.
+* Password hashing with salt.
+* File uploads. 
+* A bunch of nice little features, too small to mention here. 
+
+
 ## Requirements
 
 * [Haxe 3.2](http://haxe.org)
