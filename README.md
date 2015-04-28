@@ -6,9 +6,11 @@ Spider is a tiny, easy to use Web Framework for Haxe targeting PHP.
 With Spider, I'm not trying to do everything for you. Just enough to get you moving in your own direction.
 
 
+
+
 ## Features
 
-* Clearn URLs and URL Routing.
+* Clean URLs and URL Routing.
 * MySQL or SQLite3 database connectivity and modeling.
 * Templates.
 * Error logging.
@@ -35,9 +37,9 @@ This is [free software](https://www.gnu.org/philosophy/free-sw.html) made availa
 
 ## Usage
 
-Don't bother yet. Very much a work in progress / learning exercise.
+Don't bother yet. I'll update this when it's ready to be played with.
 
-This is what it's like to start a new project that connects to a database.
+This is what it's like to start a new project that connects to an SQLite3 database.
 
 ```haxe
 public function new() {
@@ -60,7 +62,7 @@ private function setupTables() {
 }
 ```
 
-By default "/" calls the doIndex method of the HomeController class.
+By default "/" calls the doDefault method of the HomeController class.
 
 In this case, we are calling view(), which is a clever function that automatically looks in the location ../private/views/controller/method.mtt for a template, that it then executes.
 
@@ -73,7 +75,7 @@ class HomeController extends Controller {
 		super();
 	}
 
-	public function doIndex() {
+	public function doDefault() {
 		view({
 			page_title : "Hello World.dev",
 			page_content : "Hello World!"
@@ -85,7 +87,7 @@ class HomeController extends Controller {
 If you want to output some json with the correct mime-type instead of executing a template, just call json() with an anonymous object instead of view().
 
 ```haxe
-public function doIndex() {
+public function doDefault() {
 	json({
 		page_title : "Hello World.dev",
 		page_content : "Hello World!"

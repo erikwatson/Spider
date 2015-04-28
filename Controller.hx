@@ -14,12 +14,12 @@ class Controller
 
 	private var pageTitle:String = "";
 	private var name(get, null):String;
-	private var forceSSL(default, set):Bool = false; // for this whole controller 
+	private var forceSSL(default, set):Bool = false; // for this whole controller
 
 	private var header:Header;
 
-	// TODO: use this for session variables that should ONLY be available on the next request 
-	private var flash:Map<String, Dynamic>; 
+	// TODO: use this for session variables that should ONLY be available on the next request
+	private var flash:Map<String, Dynamic>;
 
 	public function new(){
 		header = new Header();
@@ -53,7 +53,7 @@ class Controller
 	}
 
 	private function login(username:String, password:String):Void {
-		// TODO 
+		// TODO
 	}
 
 	// minor convenience function
@@ -91,32 +91,36 @@ class Controller
 		}
 	}
 
-	// output this object as a json file 
+	private function filter(filters:Array<Dynamic>) {
+		trace("array is dynamic");
+	}
+
+	// output this object as a json file
 	private function json(obj:{}) {
 		header.set(Header.contentType, Header.json);
 		Lib.print(Json.stringify(obj));
 	}
 
-	// output this object as an xml file 
+	// output this object as an xml file
 	private function xml(obj:{}) {
 		header.set(Header.contentType, Header.xml);
 		// TODO
 	}
 
-	// output this object as an atom feed 
+	// output this object as an atom feed
 	private function atom(obj:{}) {
 		header.set(Header.contentType, Header.atom);
 		// TODO
 	}
 
-	// output this object as an rss feed 
+	// output this object as an rss feed
 	private function rss(obj:{}) {
 		header.set(Header.contentType, Header.rss);
 		// TODO
 	}
 
 
-	// Getters and Setters 
+	// Getters and Setters
 
 	private function set_forceSSL(ssl:Bool):Bool {
 		if(ssl) {
