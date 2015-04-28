@@ -12,7 +12,8 @@ class Utils
 		return "";
 	}
 
-	public static function generateSalt(length:Int = 32):String {
+	public static function generateSalt():String {
+		// use Spider.config.saltLength
 		return "";
 	}
 
@@ -28,7 +29,7 @@ class Utils
 		return false;
 	}
 
-	public static function isEmail(email:String):Bool {
+	public static function isEmailAddress(email:String):Bool {
 		return false;
 	}
 

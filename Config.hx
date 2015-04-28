@@ -34,6 +34,7 @@ class Config
 
 	// How many iterations should PBKDF2 work on new Passwords? 
 	public var passwordIterations:Int = 10000;
+	public var saltLength:Int = 32;
 
 	// Session variable names
 	public var isLoggedIn:String = "is_logged_in";
