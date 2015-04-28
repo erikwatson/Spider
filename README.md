@@ -1,7 +1,9 @@
 Spider
 ======
 
-Spider is a tiny web framework for Haxe targeting PHP.
+Spider is a tiny, easy to use Web Framework for Haxe targeting PHP.
+
+With Spider, I'm not trying to do everything for you. Just enough to get you moving in your own direction. 
 
 
 ## Features
@@ -23,6 +25,20 @@ Spider is a tiny web framework for Haxe targeting PHP.
 ## Usage
 
 Don't bother yet. Very much a work in progress / learning exercise. 
+
+```Haxe
+public function new() {
+	var site = new Spider();
+	site.setupTables = setupTables;
+
+	site.run("/");
+}
+
+
+private function setupTables() {
+	// create your tables with the SPOD models here 
+}
+```
 
 
 ## License
