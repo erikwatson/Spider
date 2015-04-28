@@ -8,7 +8,6 @@ import spider.Spider;
 import spider.Config;
 
 // Easily output Error messages, etc to a log file
-// Might be cool to have it expect Markdown, so we can make a nice on-site log viewer. 
 
 class Log
 {

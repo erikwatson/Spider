@@ -9,6 +9,7 @@ class Header {
 	// values 
 	public static inline var atom = "application/atom+xml";
 	public static inline var css = "text/css";
+	public static inline var html = "text/html";
 	public static inline var js = "text/javascript";
 	public static inline var jpeg = "image/jpeg";
 	public static inline var json = "application/json";

@@ -73,6 +73,8 @@ class Controller
 
 	// draw the current view with these properties
 	private function view(obj:{}, ?pos:PosInfos) {
+		header.set(Header.contentType, Header.html);
+
 		// figure out the location of the template
 		var simpleName = StringTools.replace(name, "controller", "");
 		var simpleMethod = Utils.firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
