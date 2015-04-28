@@ -26,7 +26,7 @@ class Spider
 	// Might be a better way to do this, dunno 
 	public static inline var version:Float = 0.01;
 
-	public function new(){
+	public function new(options:{}){
 		
 	}
 

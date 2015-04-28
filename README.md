@@ -31,10 +31,12 @@ public function new() {
 	var site = new Spider({
 		// config options 
 		siteName : "My Awesome Site!",
+		dbName : "spider",
+		dbType : DBType.SQLite3,
 		setupTables : setupTables
 	});
 
-	site.run("/");
+	site.run("/"); // basic home page exists by default 
 }
 
 private function setupTables() {
