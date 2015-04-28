@@ -15,12 +15,42 @@ class Log
 	private static var output:String = "";
 	private static var somethingToSay(get, null):Bool;
 
-	public static function add(message:String) {
+	public static function message(str:String) {
 		var messageOutput:String = "";
 
 		messageOutput += getTime();
-		messageOutput += ": ";
-		messageOutput += message;
+		messageOutput += " : ";
+		messageOutput += str;
+		messageOutput += "\n \n";
+
+		output += messageOutput;
+
+		sayIt();
+	}
+
+	// same as a message but with different formatting
+	public static function warning(str:String) {
+		var messageOutput:String = "";
+
+		messageOutput += getTime();
+		messageOutput += " : ";
+		messageOutput += "**Warning : **";
+		messageOutput += str;
+		messageOutput += "\n \n";
+
+		output += messageOutput;
+
+		sayIt();
+	}
+
+	// same as a message but with different formatting 
+	public static function error(str:String) {
+		var messageOutput:String = "";
+
+		messageOutput += getTime();
+		messageOutput += " : ";
+		messageOutput += "**Error : **";
+		messageOutput += str;
 		messageOutput += "\n \n";
 
 		output += messageOutput;

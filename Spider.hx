@@ -46,7 +46,7 @@ class Spider
 			if(setupTables != null){
 				setupTables();
 			} else {
-				Log.add("**Error:** setupTables can not be null!");
+				Log.error("setupTables can not be null!");
 			}
 		}
 

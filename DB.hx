@@ -41,17 +41,17 @@ class DB
 						Manager.initialize();
 
 					default:
-						Log.add("**Error:** Unexpected DB Type.");
+						Log.error("Unexpected DB Type.");
 				}
 			} else {
-				Log.add("**Error:** DB Type can not be null.");
+				Log.error("DB Type can not be null.");
 			}
 		}
 	}
 
 	private function connectMySQL():Void {
 		if(Spider.config.dbHost == null || Spider.config.dbPort == null || Spider.config.dbUser == null || Spider.config.dbPass == null || Spider.config.dbName == null) {
-			Log.add("**Error:** There is a problem with your MySQL Connection settings.");
+			Log.error("There is a problem with your MySQL Connection settings.");
 		} else {
 			dbConnect = sys.db.Mysql.connect(
 				{
