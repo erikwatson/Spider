@@ -15,7 +15,7 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 * Password hashing with salt.
 * File uploads.
 * New project generation with [SpiderTools](https://github.com/championchap/SpiderTools)
-* and more! 
+* and more!
 
 
 ## Requirements
