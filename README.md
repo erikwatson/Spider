@@ -6,8 +6,6 @@ Spider is a tiny, easy to use Web Framework for Haxe targeting PHP.
 With Spider, I'm not trying to do everything for you. Just enough to get you moving in your own direction.
 
 
-
-
 ## Features
 
 * Clean URLs and URL Routing.
@@ -16,7 +14,8 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 * Error logging.
 * Password hashing with salt.
 * File uploads.
-* A bunch of nice little features, too small to mention here.
+* New project generation with [SpiderTools](https://github.com/championchap/SpiderTools)
+* and more! 
 
 
 ## Requirements
