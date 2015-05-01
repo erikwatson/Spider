@@ -25,6 +25,10 @@ class Controller
 		header = new Header();
 	}
 
+	public function doDefault() {
+		view({  });
+	}
+
 	public inline function redirectToHome():Void {
 		Spider.url = Spider.config.homeURL;
 	}

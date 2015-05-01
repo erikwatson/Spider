@@ -26,19 +26,19 @@ class Spider
 	public static var secure(get, null):Bool;
 	public static var loggedIn(get, null):Bool;
 
-	// Might be a better way to do this, dunno 
+	// Might be a better way to do this, dunno
 	public static inline var version:Float = 0.01;
 
 	public function new(options:SpiderOptions) {
 		try {
 
 			if(options.dbType == DBType.MySQL) {
-				if (options.dbName == null || 
+				if (options.dbName == null ||
 					options.dbHost == null ||
 					options.dbPass == null ||
 					options.dbPort == null ||
 					options.dbSocket == null ||
-					options.dbUser == null) 
+					options.dbUser == null)
 				{
 					Log.error("Some MySQL options are missing.");
 				} else {
@@ -66,7 +66,7 @@ class Spider
 			}
 
 			if(options.dbType == DBType.None) {
-				
+
 			}
 
 		} catch(e:String) {
@@ -84,7 +84,7 @@ class Spider
 			makeSecure();
 		}
 
-		// connect to and optionally set up the database 
+		// connect to and optionally set up the database
 		if(config.dbType != DBType.None) {
 			database.connect();
 
@@ -95,7 +95,7 @@ class Spider
 			}
 		}
 
-		// run the current route 
+		// run the current route
 		Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
 
 		// close stuff
@@ -106,16 +106,21 @@ class Spider
 		Session.close();
 	}
 
+	// apply a list of filters to a list of routes
+	public function filter(routes:Array<Dynamic>, filters:Array<Dynamic>) {
+		// TODO
+	}
+
 	public static function makeSecure():Void {
 		if(!secure) {
 			Web.setHeader("Location", "https://" + Request.host + url);
 			Sys.exit(0);
 		}
 	}
-	
 
 
-	// Getters and Setters 
+
+	// Getters and Setters
 
 	private static function get_loggedIn():Bool {
 		var loggedIn = true;
@@ -128,13 +133,22 @@ class Spider
 		return loggedIn;
 	}
 
-	// TODO: This isn't reliable
 	private static function get_secure():Bool {
-		if(Request.port == "443") {
-			return true;
-		} else {
-			return false;
+		var result = false;
+
+		untyped __php__("
+			if (isset($_SERVER['HTTPS'])){
+				$result = true;
+			}
+		");
+
+		if(result == false){
+			if(Request.port == "443") {
+				result = true;
+			}
 		}
+
+		return result;
 	}
 
 	private static function get_url():String {
