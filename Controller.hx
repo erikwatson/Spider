@@ -18,9 +18,6 @@ class Controller
 
 	private var header:Header;
 
-	// TODO: use this for session variables that should ONLY be available on the next request
-	private var flash:Map<String, Dynamic>;
-
 	public function new(){
 		header = new Header();
 	}

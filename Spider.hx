@@ -16,12 +16,12 @@ import spider.Log;
 class Spider
 {
 
+	private var database:DB = new DB();
+	public var setupTables:Void->Void;
+
 	public static var config:Config = new Config();
 
 	public static var url(get, set):String;
-
-	private var database:DB = new DB();
-	public var setupTables:Void->Void;
 
 	public static var secure(get, null):Bool;
 	public static var loggedIn(get, null):Bool;
