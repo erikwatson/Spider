@@ -57,21 +57,6 @@ class Controller
 		// TODO
 	}
 
-	// minor convenience function
-	private inline function isSecure():Bool {
-		return Spider.secure;
-	}
-
-	// minor convenience function
-	private inline function makeSecure():Void {
-		Spider.makeSecure();
-	}
-
-	// minor convenience function
-	private inline function redirect(url:String):Void {
-		Spider.url = url;
-	}
-
 	// draw the current view with these properties
 	private function view(obj:{}, ?pos:PosInfos) {
 		header.set(Header.contentType, Header.html);

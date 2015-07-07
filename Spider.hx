@@ -13,21 +13,21 @@ import spider.Request;
 import spider.options.SpiderOptions;
 import spider.Log;
 
+import app.controllers.*;
+
 class Spider
 {
+
+	// Might be a better way to do this, dunno
+	public static inline var version:Float = 0.01;
 
 	private var database:DB = new DB();
 	public var setupTables:Void->Void;
 
 	public static var config:Config = new Config();
-
 	public static var url(get, set):String;
 
-	public static var secure(get, null):Bool;
-	public static var loggedIn(get, null):Bool;
-
-	// Might be a better way to do this, dunno
-	public static inline var version:Float = 0.01;
+	private var routes:Array<Route> = [];
 
 	public function new(options:SpiderOptions) {
 		try {
@@ -75,6 +75,10 @@ class Spider
 		}
 	}
 
+	public function addRoute(route:Route):Void {
+		routes.push(route); // TODO: check to see if it already exists and throw errors 
+	}
+
 	public function run(url:String):Void {
 		Session.start();
 		Request.start();
@@ -95,8 +99,28 @@ class Spider
 			}
 		}
 
+		var currentRoute = routes[0];
+		var controllerLocation = 'app.controllers.${currentRoute.controller}Controller';
+		var instance:Controller;
+
+		// if there's a before function set, run it
+		if(currentRoute.before != null){
+			currentRoute.before();
+		}
+
 		// run the current route
-		Dispatch.run(url, new haxe.ds.StringMap(), new app.controllers.HomeController());
+		instance = Type.createInstance(Type.resolveClass("app.controllers.HomeController"), []);
+
+		Dispatch.run(
+			url,
+			new haxe.ds.StringMap(), 
+			instance
+		);
+
+		// if there's an after function set, run it 
+		if(currentRoute.after != null){
+			currentRoute.after();
+		}
 
 		// close stuff
 		if(config.dbType != DBType.None) {
@@ -112,7 +136,7 @@ class Spider
 	}
 
 	public static function makeSecure():Void {
-		if(!secure) {
+		if(!Request.isSecure) {
 			Web.setHeader("Location", "https://" + Request.host + url);
 			Sys.exit(0);
 		}
@@ -121,35 +145,6 @@ class Spider
 
 
 	// Getters and Setters
-
-	private static function get_loggedIn():Bool {
-		var loggedIn = true;
-		var sv = Session.get(Spider.config.isLoggedIn);
-
-		if(sv != true){
-			loggedIn = false;
-		}
-
-		return loggedIn;
-	}
-
-	private static function get_secure():Bool {
-		var result = false;
-
-		untyped __php__("
-			if (isset($_SERVER['HTTPS'])){
-				$result = true;
-			}
-		");
-
-		if(result == false){
-			if(Request.port == "443") {
-				result = true;
-			}
-		}
-
-		return result;
-	}
 
 	private static function get_url():String {
 		return Web.getURI();

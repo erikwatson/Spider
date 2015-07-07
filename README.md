@@ -14,7 +14,7 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 * Error logging.
 * Password hashing with salt.
 * File uploads.
-* New project generation with [SpiderTools](https://github.com/championchap/SpiderTools)
+* New project generation, etc with [SpiderTools](https://github.com/championchap/SpiderTools)
 * and more!
 
 
@@ -50,14 +50,21 @@ public function new() {
 		setupTables : setupTables
 	});
 
+	addRoutes(site);
+
 	site.run("/"); // basic home page exists by default
 }
 
+// db stuff is all handled with SPOD 
 private function setupTables() {
-	// create your tables with the SPOD models here
 	if(!TableCreate.exists(User.manager)) {
 		TableCreate.create(User.manager);
 	}
+}
+
+private function addRoutes(site:Spider) {
+	site.addRoute({ location : "/about/", controller : "about" });
+	site.addRoute({ location : "/about/edit/{id}/", controller : "about", action : "edit" });
 }
 ```
 
@@ -76,8 +83,9 @@ class HomeController extends Controller {
 
 	public function doDefault() {
 		view({
-			page_title : "Hello World.dev",
-			page_content : "Hello World!"
+			title : "Hello World.dev",
+			description : "Meta Description Here!",
+			content : "Hello World!"
 		});
 	}
 }
@@ -88,8 +96,15 @@ If you want to output some json with the correct mime-type instead of executing 
 ```haxe
 public function doDefault() {
 	json({
-		page_title : "Hello World.dev",
-		page_content : "Hello World!"
+		title : "Hello World.dev",
+		description : "Meta Description Here!",
+		content : "Hello World!"
 	});
 }
+```
+
+Redirects are super easy.
+
+```haxe
+Spider.url = "/about/";
 ```

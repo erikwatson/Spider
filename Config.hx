@@ -5,8 +5,9 @@ package spider;
 
 class Config
 {
-	public var siteName:String = "Spider Web";
 
+	public var siteName:String = "Spider Web";
+	public var siteEnabled:Bool = true;
 	public var sitewideSSL:Bool = false;
 	public var logging:Bool = true;
 

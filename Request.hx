@@ -13,14 +13,18 @@ class Request
 	public static var method(get, null):String;
 	public static var params(get, null):StringMap<Int>;
 	public static var url(get, null):String;
-	public static var isAJAX(get, null):Bool;
 	public static var ip(get, null):String;
 	public static var port(get, null):String;
 	public static var date(get, null):Date;
 	public static var browser(get, null):String;
 	public static var OS(get, null):String;
 	public static var language(get, null):String;
+	public static var PHPVersion(get, null):String;
 	// public static var headers(get, null):String;
+
+	public static var isAJAX(get, null):Bool;
+	public static var isLocal(get, null):Bool;
+	public static var isSecure(get, null):Bool;
 
 	private static var now:Date;
 
@@ -86,5 +90,38 @@ class Request
 	private static function get_language():String {
 		var lang:String = untyped __php__("$_SERVER['HTTP_ACCEPT_LANGUAGE']");
 		return lang.substr(0, 2);
+	}
+
+	// check if the site is running on a local server or is live and in production 
+	private static function get_isLocal():Bool {
+		var result = false;
+
+		if(ip == "127.0.0.1") {
+			result = true;
+		}
+
+		return result;
+	}
+
+	private static function get_isSecure():Bool {
+		var result = false;
+
+		untyped __php__("
+			if (isset($_SERVER['HTTPS'])){
+				$result = true;
+			}
+		");
+
+		if(result == false){
+			if(Request.port == "443") {
+				result = true;
+			}
+		}
+
+		return result;
+	}
+
+	public static function get_PHPVersion():String {
+		return untyped __call__('phpversion');
 	}
 }
