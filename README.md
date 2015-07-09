@@ -67,7 +67,6 @@ In this case, we are calling view(), which is a clever function that automatical
 
 Pass properties to the view through an anonymous object.
 
-
 ```haxe
 class HomeController extends Controller {
 	public function new() {
@@ -84,20 +83,25 @@ class HomeController extends Controller {
 }
 ```
 
-If you want to output some json with the correct mime-type instead of executing a template, just call json() with an anonymous object instead of view().
-
-```haxe
-public function doDefault() {
-	json({
-		title : "Hello World.dev",
-		description : "Meta Description Here!",
-		content : "Hello World!"
-	});
-}
-```
-
-Redirects are super easy.
+Redirects are super easy, just change the URL!
 
 ```haxe
 Spider.url = "/about/";
+```
+
+Routes are defined in the Routes Class in your app.
+
+```haxe
+class Routes {
+	public function new() {
+	}
+
+	public function doDefault(d:Dispatch){
+		d.dispatch( new HomeController() );
+	}
+
+	public function doAbout(d:Dispatch){
+		d.dispatch( new AboutController() );
+	}
+}
 ```
