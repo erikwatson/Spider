@@ -27,27 +27,25 @@ class Spider
 	public static var config:Config = new Config();
 	public static var url(get, set):String;
 
-	private var routes:Array<Route> = [];
-
 	public function new(options:SpiderOptions) {
 		try {
 
 			if(options.dbType == DBType.MySQL) {
-				if (options.dbName == null ||
-					options.dbHost == null ||
-					options.dbPass == null ||
-					options.dbPort == null ||
-					options.dbSocket == null ||
-					options.dbUser == null)
+				if (options.dbName 		== null ||
+					options.dbHost 		== null ||
+					options.dbPass 		== null ||
+					options.dbPort 		== null ||
+					options.dbSocket 	== null ||
+					options.dbUser 		== null )
 				{
 					Log.error("Some MySQL options are missing.");
 				} else {
-					config.dbName = options.dbName;
-					config.dbHost = options.dbHost;
-					config.dbPass = options.dbPass;
-					config.dbPort = options.dbPort;
+					config.dbName 	= options.dbName;
+					config.dbHost 	= options.dbHost;
+					config.dbPass 	= options.dbPass;
+					config.dbPort 	= options.dbPort;
 					config.dbSocket = options.dbSocket;
-					config.dbUser = options.dbUser;
+					config.dbUser 	= options.dbUser;
 				}
 			}
 
@@ -75,11 +73,7 @@ class Spider
 		}
 	}
 
-	public function addRoute(route:Route):Void {
-		routes.push(route); // TODO: check to see if it already exists and throw errors 
-	}
-
-	public function run(url:String):Void {
+	public function run():Void {
 		Session.start();
 		Request.start();
 
@@ -99,27 +93,16 @@ class Spider
 			}
 		}
 
-		var currentRoute = routes[0];
-		var controllerLocation = 'app.controllers.${currentRoute.controller}Controller';
-		var instance:Controller;
-
-		// if there's a before function set, run it
-		if(currentRoute.before != null){
-			currentRoute.before();
-		}
-
-		// run the current route
-		instance = Type.createInstance(Type.resolveClass("app.controllers.HomeController"), []);
-
-		Dispatch.run(
-			url,
-			new haxe.ds.StringMap(), 
-			instance
-		);
-
-		// if there's an after function set, run it 
-		if(currentRoute.after != null){
-			currentRoute.after();
+		try {
+			Dispatch.run(
+				url,
+				new haxe.ds.StringMap(),
+				new app.routes.Routes() // wanted this to be configurable, not sure I can with Type :( 
+			);
+		} catch(e:Dynamic) { // i actually don't know what the real type of this error is but whatever, man! 
+			trace("Error 404 - Page not found!");
+			// display the lost page here
+			// maybe write something to the site log too 
 		}
 
 		// close stuff

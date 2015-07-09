@@ -38,7 +38,7 @@ This is [free software](https://www.gnu.org/philosophy/free-sw.html) made availa
 
 Don't bother yet. I'll update this when it's ready to be played with.
 
-This is what it's like to start a new project that connects to an SQLite3 database.
+This is what it's like to start a new project that connects to an SQLite3 database. Connecting to a database is optional, but you'll probably want one. 
 
 ```haxe
 public function new() {
@@ -50,9 +50,7 @@ public function new() {
 		setupTables : setupTables
 	});
 
-	addRoutes(site);
-
-	site.run("/"); // basic home page exists by default
+	site.run(); // basic home page exists by default
 }
 
 // db stuff is all handled with SPOD 
@@ -61,14 +59,9 @@ private function setupTables() {
 		TableCreate.create(User.manager);
 	}
 }
-
-private function addRoutes(site:Spider) {
-	site.addRoute({ location : "/about/", controller : "about" });
-	site.addRoute({ location : "/about/edit/{id}/", controller : "about", action : "edit" });
-}
 ```
 
-By default "/" calls the doDefault method of the HomeController class.
+By default the doDefault method of the HomeController is called, this is your index page. 
 
 In this case, we are calling view(), which is a clever function that automatically looks in the location ../private/views/controller/method.mtt for a template, that it then executes.
 
