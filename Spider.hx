@@ -100,9 +100,8 @@ class Spider
 				new app.routes.Routes() // wanted this to be configurable, not sure I can with Type :( 
 			);
 		} catch(e:Dynamic) { // i actually don't know what the real type of this error is but whatever, man! 
-			trace("Error 404 - Page not found!");
-			// display the lost page here
-			// maybe write something to the site log too 
+			// should probably log the error here 
+			url = config.lostURL;
 		}
 
 		// close stuff
@@ -111,11 +110,6 @@ class Spider
 		}
 
 		Session.close();
-	}
-
-	// apply a list of filters to a list of routes
-	public function filter(routes:Array<Dynamic>, filters:Array<Dynamic>) {
-		// TODO
 	}
 
 	public static function makeSecure():Void {
