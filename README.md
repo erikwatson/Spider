@@ -23,17 +23,6 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 * [Haxe 3.2](http://haxe.org)
 
 
-## License
-
-This is [free software](https://www.gnu.org/philosophy/free-sw.html) made available under the GPL V3 Licence.
-
-
-## Who do I talk to?
-
-* [Erik on Twitter](https://twitter.com/championchap)
-* [ErikWatson.me](http://erikwatson.me)
-
-
 ## Usage
 
 Don't bother yet. I'll update this when it's ready to be played with.
@@ -105,3 +94,13 @@ class Routes {
 	}
 }
 ```
+
+## License
+
+This is [free software](https://www.gnu.org/philosophy/free-sw.html) made available under the GPL V3 Licence.
+
+
+## Who do I talk to?
+
+* [Erik on Twitter](https://twitter.com/championchap)
+* [ErikWatson.me](http://erikwatson.me)
