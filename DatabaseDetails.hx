@@ -4,11 +4,11 @@ import spider.Config.DBType;
 
 typedef DatabaseDetails = {
 	public var dbType:DBType;
-	
-	public var dbHost:String;
-	public var dbPort:Int;
 	public var dbName:String; // used by MySQL and SQLite3
-	public var dbSocket:String;
-	public var dbUser:String;
-	public var dbPass:String;
+
+	@:optional public var dbHost:String;
+	@:optional public var dbPort:Int;
+	@:optional public var dbSocket:String;
+	@:optional public var dbUser:String;
+	@:optional public var dbPass:String;
 };

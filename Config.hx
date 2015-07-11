@@ -41,6 +41,10 @@ class Config
 
 	public function get_database():DatabaseDetails {
 		if(Request.isLocal) {
+			if(localDatabase == null){
+				return liveDatabase;
+			}
+			
 			return localDatabase;
 		}
 

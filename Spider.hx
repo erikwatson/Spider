@@ -1,19 +1,19 @@
 package spider;
 
-import sys.FileSystem;
+import app.controllers.*;
 
 import haxe.web.Dispatch;
 
-import php.Web;
-import php.Session;
 import php.Lib;
+import php.Session;
+import php.Web;
 
 import spider.Config.DBType;
-import spider.Request;
-import spider.options.SpiderOptions;
 import spider.Log;
+import spider.Request;
+import spider.SpiderOptions;
 
-import app.controllers.*;
+import sys.FileSystem;
 
 class Spider
 {
@@ -28,32 +28,47 @@ class Spider
 	public static var url(get, set):String;
 
 	public function new(options:SpiderOptions) {
+
+		// pass the databases to the config
+		if(options.database == null && options.localDatabase == null){
+			config.database.dbType = DBType.None;
+		}
+
+		if(options.database != null) {
+			config.liveDatabase = options.database;
+		}
+
+		if(options.localDatabase != null){
+			config.localDatabase = options.localDatabase;
+		}
+
+		// connect
 		try {
 
-			if(options.dbType == DBType.MySQL) {
-				if (options.dbName 		== null ||
-					options.dbHost 		== null ||
-					options.dbPass 		== null ||
-					options.dbPort 		== null ||
-					options.dbSocket 	== null ||
-					options.dbUser 		== null )
+			if(options.database.dbType == DBType.MySQL) {
+				if (options.database.dbName 		== null ||
+					options.database.dbHost 		== null ||
+					options.database.dbPass 		== null ||
+					options.database.dbPort 		== null ||
+					options.database.dbSocket 		== null ||
+					options.database.dbUser 		== null )
 				{
 					Log.error("Some MySQL options are missing.");
 				} else {
-					config.database.dbName 	= options.dbName;
-					config.database.dbHost 	= options.dbHost;
-					config.database.dbPass 	= options.dbPass;
-					config.database.dbPort 	= options.dbPort;
-					config.database.dbSocket = options.dbSocket;
-					config.database.dbUser 	= options.dbUser;
+					config.database.dbName 	= options.database.dbName;
+					config.database.dbHost 	= options.database.dbHost;
+					config.database.dbPass 	= options.database.dbPass;
+					config.database.dbPort 	= options.database.dbPort;
+					config.database.dbSocket = options.database.dbSocket;
+					config.database.dbUser 	= options.database.dbUser;
 				}
 			}
 
-			if(options.dbType == DBType.SQLite3) {
-				if(options.dbName == null){
+			if(options.database.dbType == DBType.SQLite3) {
+				if(options.database.dbName == null){
 					Log.error("Must set a dbName when using SQLite3.");
 				} else {
-					config.database.dbName = options.dbName;
+					config.database.dbName = options.database.dbName;
 				}
 
 				if(options.setupTables == null){
@@ -63,7 +78,7 @@ class Spider
 				}
 			}
 
-			if(options.dbType == DBType.None) {
+			if(options.database.dbType == DBType.None) {
 
 			}
 
@@ -82,13 +97,6 @@ class Spider
 			makeSecure();
 		}
 
-		// remove trailing slashes from the url
-		// because Dispatch doesn't seem to like them very much 
-		// this works but i'm turning it off for now, doesn't seem like a good idea :( 
-		if(hasTrailingSlash(url)) {
-			// url = removeTrailingSlash(url);
-		}
-
 		// connect to and optionally set up the database
 		if(config.database.dbType != DBType.None) {
 			database.connect();
@@ -100,6 +108,7 @@ class Spider
 			}
 		}
 
+		// Run the Route 
 		try {
 			Dispatch.run(
 				url,
@@ -111,7 +120,7 @@ class Spider
 			url = config.lostURL;
 		}
 
-		// close stuff
+		// Close Down 
 		if(config.database.dbType != DBType.None) {
 			database.close();
 		}

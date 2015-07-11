@@ -1,7 +1,4 @@
-package spider.options;
-
-import spider.Config.DBType;
-import spider.DatabaseDetails;
+package spider;
 
 typedef SpiderOptions = {
 	@:optional var name:String;
@@ -11,7 +8,7 @@ typedef SpiderOptions = {
 	@:optional var saltLength:Int;
 
 	@:optional var localDatabase:DatabaseDetails;
-	@:optional var liveDatabase:DatabaseDetails;
+	@:optional var database:DatabaseDetails;
 
 	@:optional var setupTables:Void->Void;
 };

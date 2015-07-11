@@ -9,7 +9,7 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 ## Features
 
 * Clean URLs and URL Routing.
-* MySQL or SQLite3 database connectivity and modeling.
+* MySQL or SQLite3 database connectivity and modeling
 * Templates.
 * Error logging.
 * Password hashing with salt.
