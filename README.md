@@ -31,12 +31,12 @@ This is what it's like to start a new project that connects to an SQLite3 databa
 
 ```haxe
 public function new() {
-	var liveDB = { dbType : DBType.SQLITE3, dbName = "spider" };
+	var db = { dbType : DBType.SQLITE3, dbName = "spider" };
 
 	var site = new Spider({
 		// config options
 		siteName : "My Awesome Site!",
-		liveDatabase : liveDB,
+		database : db,
 		setupTables : setupTables
 	});
 
