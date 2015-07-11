@@ -25,7 +25,7 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 
 ## Usage
 
-Don't bother yet. I'll update this when it's ready to be played with.
+_Don't bother yet._ I'll update this when it's ready to be played with.
 
 This is what it's like to start a new project that connects to an SQLite3 database. Connecting to a database is optional, but you'll probably want one. 
 
