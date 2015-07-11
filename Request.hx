@@ -25,6 +25,7 @@ class Request
 	public static var isAJAX(get, null):Bool;
 	public static var isLocal(get, null):Bool;
 	public static var isSecure(get, null):Bool;
+	public static var isPost(get, null):Bool;
 
 	private static var now:Date;
 
@@ -86,7 +87,6 @@ class Request
 		return "";
 	}
 
-	// TODO
 	private static function get_language():String {
 		var lang:String = untyped __php__("$_SERVER['HTTP_ACCEPT_LANGUAGE']");
 		return lang.substr(0, 2);
@@ -94,13 +94,11 @@ class Request
 
 	// check if the site is running on a local server or is live and in production 
 	private static function get_isLocal():Bool {
-		var result = false;
-
 		if(ip == "127.0.0.1") {
-			result = true;
+			return true;
 		}
 
-		return result;
+		return false;
 	}
 
 	private static function get_isSecure():Bool {
@@ -123,5 +121,13 @@ class Request
 
 	public static function get_PHPVersion():String {
 		return untyped __call__('phpversion');
+	}
+
+	public static function get_isPost():Bool {
+		if(method == "POST") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

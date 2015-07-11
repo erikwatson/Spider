@@ -28,8 +28,8 @@ class DB
 
 		if(!isConnected) {
 
-			if(Spider.config.dbType != null) {
-				switch (Spider.config.dbType) {
+			if(Spider.config.database.dbType != null) {
+				switch (Spider.config.database.dbType) {
 					case DBType.MySQL:
 						connectMySQL();
 						Manager.cnx = dbConnect;
@@ -50,17 +50,17 @@ class DB
 	}
 
 	private function connectMySQL():Void {
-		if(Spider.config.dbHost == null || Spider.config.dbPort == null || Spider.config.dbUser == null || Spider.config.dbPass == null || Spider.config.dbName == null) {
+		if(Spider.config.database.dbHost == null || Spider.config.database.dbPort == null || Spider.config.database.dbUser == null || Spider.config.database.dbPass == null || Spider.config.database.dbName == null) {
 			Log.error("There is a problem with your MySQL Connection settings.");
 		} else {
 			dbConnect = sys.db.Mysql.connect(
 				{
-					host : Spider.config.dbHost,
-					port : Spider.config.dbPort,
-					user : Spider.config.dbUser,
-					pass : Spider.config.dbPass,
-					socket: Spider.config.dbSocket,
-					database : Spider.config.dbName
+					host : Spider.config.database.dbHost,
+					port : Spider.config.database.dbPort,
+					user : Spider.config.database.dbUser,
+					pass : Spider.config.database.dbPass,
+					socket: Spider.config.database.dbSocket,
+					database : Spider.config.database.dbName
 				}
 			);
 
@@ -71,7 +71,7 @@ class DB
 	private function connectSQLite():Void {
 		var path = Spider.config.dbLocation;
 
-		path += Spider.config.dbName;
+		path += Spider.config.database.dbName;
 		path += ".db";
 
 		if(path == null) {

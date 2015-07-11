@@ -12,14 +12,9 @@ class Config
 	public var logging:Bool = true;
 
 	// Database Options
-	public var dbType:DBType = DBType.None;
-
-	public var dbHost:String;
-	public var dbPort:Int;
-	public var dbName:String = "spider"; // used by MySQL and SQLite3
-	public var dbSocket:String;
-	public var dbUser:String;
-	public var dbPass:String;
+	public var database(get, null):DatabaseDetails;
+	public var localDatabase:DatabaseDetails;
+	public var liveDatabase:DatabaseDetails;
 
 	// Important Locations
 	public var dbLocation:String = "../private/data/"; // used by SQLite Only
@@ -42,6 +37,14 @@ class Config
 
 	public function new() {
 		
+	}
+
+	public function get_database():DatabaseDetails {
+		if(Request.isLocal) {
+			return localDatabase;
+		}
+
+		return liveDatabase;
 	}
 }
 

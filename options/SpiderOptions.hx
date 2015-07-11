@@ -1,6 +1,7 @@
 package spider.options;
 
 import spider.Config.DBType;
+import spider.DatabaseDetails;
 
 typedef SpiderOptions = {
 	@:optional var name:String;
@@ -9,13 +10,8 @@ typedef SpiderOptions = {
 	@:optional var passwordIterations:Int;
 	@:optional var saltLength:Int;
 
-	@:optional var dbType:DBType;
-	@:optional var dbHost:String;
-	@:optional var dbPort:Int;
-	@:optional var dbName:String;
-	@:optional var dbSocket:String;
-	@:optional var dbUser:String;
-	@:optional var dbPass:String;
+	@:optional var localDatabase:DatabaseDetails;
+	@:optional var liveDatabase:DatabaseDetails;
 
 	@:optional var setupTables:Void->Void;
 };

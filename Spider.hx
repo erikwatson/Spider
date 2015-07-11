@@ -40,12 +40,12 @@ class Spider
 				{
 					Log.error("Some MySQL options are missing.");
 				} else {
-					config.dbName 	= options.dbName;
-					config.dbHost 	= options.dbHost;
-					config.dbPass 	= options.dbPass;
-					config.dbPort 	= options.dbPort;
-					config.dbSocket = options.dbSocket;
-					config.dbUser 	= options.dbUser;
+					config.database.dbName 	= options.dbName;
+					config.database.dbHost 	= options.dbHost;
+					config.database.dbPass 	= options.dbPass;
+					config.database.dbPort 	= options.dbPort;
+					config.database.dbSocket = options.dbSocket;
+					config.database.dbUser 	= options.dbUser;
 				}
 			}
 
@@ -53,7 +53,7 @@ class Spider
 				if(options.dbName == null){
 					Log.error("Must set a dbName when using SQLite3.");
 				} else {
-					config.dbName = options.dbName;
+					config.database.dbName = options.dbName;
 				}
 
 				if(options.setupTables == null){
@@ -82,8 +82,15 @@ class Spider
 			makeSecure();
 		}
 
+		// remove trailing slashes from the url
+		// because Dispatch doesn't seem to like them very much 
+		// this works but i'm turning it off for now, doesn't seem like a good idea :( 
+		if(hasTrailingSlash(url)) {
+			// url = removeTrailingSlash(url);
+		}
+
 		// connect to and optionally set up the database
-		if(config.dbType != DBType.None) {
+		if(config.database.dbType != DBType.None) {
 			database.connect();
 
 			if(setupTables != null){
@@ -105,7 +112,7 @@ class Spider
 		}
 
 		// close stuff
-		if(config.dbType != DBType.None) {
+		if(config.database.dbType != DBType.None) {
 			database.close();
 		}
 
@@ -117,6 +124,18 @@ class Spider
 			Web.setHeader("Location", "https://" + Request.host + url);
 			Sys.exit(0);
 		}
+	}
+
+	public static function hasTrailingSlash(s:String):Bool {
+		if(s.charAt(s.length - 1) == "/") {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static function removeTrailingSlash(s:String):String {
+		return s.substr(0, s.length - 1);
 	}
 
 
