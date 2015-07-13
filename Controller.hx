@@ -92,9 +92,16 @@ class Controller
 		// try to execute the template
 		try {
 			var f = File.getContent(viewPath);
+			var layout = File.getContent('../private/views/layout.mtt');
+			
 			var t = new Template(f);
+			var viewOutput = t.execute(obj);
 
-			Lib.print(t.execute(obj));
+			t = new Template(layout);
+
+			Lib.print(t.execute({ view : viewOutput }));
+
+			// Lib.print(t.execute(obj));
 		} catch(e:String) {
 			Lib.print('No Template found at $viewPath.');
 		}

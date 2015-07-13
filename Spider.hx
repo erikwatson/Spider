@@ -46,13 +46,14 @@ class Spider
 		try {
 
 			if(options.database.dbType == DBType.MySQL) {
-				if (options.database.dbName 		== null ||
+				if (
+					options.database.dbName 		== null ||
 					options.database.dbHost 		== null ||
 					options.database.dbPass 		== null ||
 					options.database.dbPort 		== null ||
 					options.database.dbSocket 		== null ||
-					options.database.dbUser 		== null )
-				{
+					options.database.dbUser 		== null 
+				){
 					Log.error("Some MySQL options are missing.");
 				} else {
 					config.database.dbName 	= options.database.dbName;
