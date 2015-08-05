@@ -47,21 +47,21 @@ class Spider
 
 			if(options.database.dbType == DBType.MySQL) {
 				if (
-					options.database.dbName 		== null ||
-					options.database.dbHost 		== null ||
-					options.database.dbPass 		== null ||
-					options.database.dbPort 		== null ||
-					options.database.dbSocket 		== null ||
-					options.database.dbUser 		== null 
+					options.database.dbName 	== null ||
+					options.database.dbHost 	== null ||
+					options.database.dbPass 	== null ||
+					options.database.dbPort 	== null ||
+					options.database.dbSocket 	== null ||
+					options.database.dbUser 	== null 
 				){
 					Log.error("Some MySQL options are missing.");
 				} else {
-					config.database.dbName 	= options.database.dbName;
-					config.database.dbHost 	= options.database.dbHost;
-					config.database.dbPass 	= options.database.dbPass;
-					config.database.dbPort 	= options.database.dbPort;
-					config.database.dbSocket = options.database.dbSocket;
-					config.database.dbUser 	= options.database.dbUser;
+					config.database.dbName 		= options.database.dbName;
+					config.database.dbHost 		= options.database.dbHost;
+					config.database.dbPass 		= options.database.dbPass;
+					config.database.dbPort 		= options.database.dbPort;
+					config.database.dbSocket 	= options.database.dbSocket;
+					config.database.dbUser 		= options.database.dbUser;
 				}
 			}
 
@@ -116,8 +116,7 @@ class Spider
 				new haxe.ds.StringMap(),
 				new app.routes.Routes() // wanted this to be configurable, not sure I can with Type :( 
 			);
-		} catch(e:Dynamic) { // i actually don't know what the real type of this error is but whatever, man! 
-			// should probably log the error here 
+		} catch(e:Dynamic) { // I actually don't know what the real type of this error is but whatever, man! 
 			url = config.lostURL;
 		}
 

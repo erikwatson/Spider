@@ -1,12 +1,12 @@
 package spider;
 
-import sys.io.File;
-import sys.FileSystem;
-import sys.io.FileOutput;
-
-import spider.Spider;
 import spider.Config;
+import spider.Spider;
 import spider.Utils;
+
+import sys.FileSystem;
+import sys.io.File;
+import sys.io.FileOutput;
 
 // Easily output Error messages, etc to a log file
 
