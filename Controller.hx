@@ -1,15 +1,17 @@
 package spider;
 
-import php.Lib;
-import php.Web;
-import haxe.Template;
-import sys.io.File;
+import haxe.crypto.Md5;
 import haxe.Json;
 import haxe.PosInfos;
-import haxe.crypto.Md5;
+import haxe.Template;
 
-import spider.Spider;
+import php.Lib;
+import php.Web;
+
 import spider.PasswordDetails;
+import spider.Spider;
+
+import sys.io.File;
 
 class Controller
 {
@@ -20,9 +22,7 @@ class Controller
 
 	private var header:Header = new Header();
 
-	public function new() {
-
-	}
+	public function new() {  }
 
 	/*
 
@@ -85,7 +85,7 @@ class Controller
 
 		// figure out the location of the template
 		var simpleName = StringTools.replace(name, "controller", "");
-		var simpleMethod = Utils.firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
+		var simpleMethod = firstCharToLower(StringTools.replace(pos.methodName, "do", ""));
 		var viewPath = '${Spider.config.viewLocation}${simpleName}/${simpleMethod}.mtt';
 
 		// try to execute the template
@@ -176,12 +176,36 @@ class Controller
 		return false;
 	}
 
+	private function isNotEmpty(s:String):Bool {
+		if(s == "" || s == null) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function firstCharToUpper(text:String):String {
+		var output = "";
+
+		output += text.charAt(0).toUpperCase();
+		output += text.substr(1);
+
+		return output;
+	}
+
+	public static function firstCharToLower(text:String):String {
+		var output = "";
+
+		output += text.charAt(0).toLowerCase();
+		output += text.substr(1);
+
+		return output;
+	}
+
 
 	/*
 
 		Getters and Setters 
-
-		These get and set things, just a little heads up. 
 	
 	*/
 
