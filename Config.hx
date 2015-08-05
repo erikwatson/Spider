@@ -20,6 +20,7 @@ class Config
 	public var dbLocation:String = "../private/data/"; // used by SQLite Only
 	public var viewLocation:String = "../private/views/";
 	public var logLocation:String = "../private/logs/";
+	public var layoutLocation:String;
 
 	// Common Redirects
 	public var homeURL:String = "/";
@@ -36,7 +37,8 @@ class Config
 	public var isLoggedIn:String = "is_logged_in";
 
 	public function new() {
-		
+		// can't access other vars in var init, so have to put this here
+		layoutLocation = '${viewLocation}/layout.mtt';
 	}
 
 	public function get_database():DatabaseDetails {

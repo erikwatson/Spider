@@ -18,12 +18,11 @@ class Controller
 	private var name(get, null):String;
 	private var forceSSL(default, set):Bool = false; // for this whole controller
 
-	private var header:Header;
+	private var header:Header = new Header();
 
-	public function new(){
-		header = new Header();
+	public function new() {
+
 	}
-
 
 	/*
 
@@ -92,7 +91,7 @@ class Controller
 		// try to execute the template
 		try {
 			var view = drawTemplate(viewPath, obj);
-			var layout = drawTemplate('../private/views/layout.mtt', { view : view });
+			var layout = drawTemplate(Spider.config.layoutLocation, { view : view });
 
 			Lib.print(layout);
 
