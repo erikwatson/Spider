@@ -8,13 +8,13 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 
 ## Features
 
-* Clean URLs and URL Routing.
-* MySQL or SQLite3 database connectivity and modeling
-* Templates.
-* Error logging.
-* Password hashing with salt.
+* Clean URLs and easy URL Routing.
+* MySQL or SQLite3 database connectivity + abstraction 
+* Templating. 
+* Logging to file, for errors, etc. 
+* Strong Password hashing with salt.
 * File uploads.
-* New project generation, etc with [SpiderTools](https://github.com/championchap/SpiderTools)
+* [SpiderTools](https://github.com/championchap/SpiderTools), a convenient command line utility.
 * and more!
 
 

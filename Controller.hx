@@ -91,17 +91,11 @@ class Controller
 
 		// try to execute the template
 		try {
-			var f = File.getContent(viewPath);
-			var layout = File.getContent('../private/views/layout.mtt');
-			
-			var t = new Template(f);
-			var viewOutput = t.execute(obj);
+			var view = drawTemplate(viewPath, obj);
+			var layout = drawTemplate('../private/views/layout.mtt', { view : view });
 
-			t = new Template(layout);
+			Lib.print(layout);
 
-			Lib.print(t.execute({ view : viewOutput }));
-
-			// Lib.print(t.execute(obj));
 		} catch(e:String) {
 			Lib.print('No Template found at $viewPath.');
 		}
@@ -152,6 +146,19 @@ class Controller
 			return true;
 		}
 
+		return false;
+	}
+
+
+	/* 
+
+		File Handling Stuff 
+
+	*/
+
+	// TODO : Should return true on success false on fail
+	// should also buffer the file uploads 
+	private function uploadFile():Bool {
 		return false;
 	}
 
