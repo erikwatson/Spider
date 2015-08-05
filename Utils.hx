@@ -37,7 +37,43 @@ class Utils {
 		return output;
 	}
 
-	public static function getTime():String {
+	public static function getUSDateFormat():String {
+		var output = "";
+
+		var day:Int;
+		var month:Int;
+		var year:Int;
+
+		day = Date.now().getDate();
+		month = Date.now().getMonth() + 1;
+		year = Date.now().getFullYear();
+
+		if(month < 10) {
+			output += '0$month';
+		} else {
+			output += '$month';
+		}
+
+		output += "-";
+
+		if(day < 10) {
+			output += '0$day';
+		} else {
+			output += '$day';
+		}
+
+		output += "-";
+
+		if(year < 10) {
+			output += '0$year';
+		} else {
+			output += '$year';
+		}
+
+		return output;
+	}
+
+	public static function getTimeFormatted():String {
 		var output = "";
 		var now = Date.now();
 
@@ -62,8 +98,6 @@ class Utils {
 		} else {
 			seconds = '${now.getSeconds()}';
 		}
-
-
 
 		output = '$hours:$minutes:$seconds';
 

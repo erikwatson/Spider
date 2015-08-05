@@ -19,7 +19,7 @@ class Log
 	public static function message(str:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Utils.getTime();
+		messageOutput += Utils.getTimeFormatted();
 		messageOutput += " : ";
 		messageOutput += str;
 		messageOutput += "\n \n";
@@ -33,7 +33,7 @@ class Log
 	public static function warning(str:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Utils.getTime();
+		messageOutput += Utils.getTimeFormatted();
 		messageOutput += " : ";
 		messageOutput += "**Warning : **";
 		messageOutput += str;
@@ -48,7 +48,7 @@ class Log
 	public static function error(str:String) {
 		var messageOutput:String = "";
 
-		messageOutput += Utils.getTime();
+		messageOutput += Utils.getTimeFormatted();
 		messageOutput += " : ";
 		messageOutput += "**Error : **";
 		messageOutput += str;
