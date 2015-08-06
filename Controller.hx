@@ -164,9 +164,14 @@ class Controller
 
 	/*
 
-		Helpers 
+		Useful stuff 
 	
 	*/
+
+	// 
+	private function flash() {
+
+	}
 
 	private function isEmpty(s:String):Bool {
 		if(s == "" || s == null) {
