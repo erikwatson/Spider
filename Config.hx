@@ -10,6 +10,7 @@ class Config
 	public var siteEnabled:Bool = true;
 	public var sitewideSSL:Bool = false;
 	public var logging:Bool = true;
+	public var dateFormat:DateFormat = DateFormat.UK;
 
 	// Database Options
 	public var database(get, null):DatabaseDetails;
@@ -21,6 +22,7 @@ class Config
 	public var viewLocation:String = "../private/views/";
 	public var logLocation:String = "../private/logs/";
 	public var layoutLocation:String;
+	public var blacklistLocation:String = "../private/data/";
 
 	// Common Redirects
 	public var homeURL:String = "/";
@@ -46,7 +48,7 @@ class Config
 			if(localDatabase == null){
 				return liveDatabase;
 			}
-			
+
 			return localDatabase;
 		}
 
@@ -54,9 +56,13 @@ class Config
 	}
 }
 
-enum DBType
-{
+enum DBType {
 	None;
 	MySQL;
 	SQLite3;
+}
+
+enum DateFormat {
+	UK;
+	US;
 }

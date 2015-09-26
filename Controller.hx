@@ -1,6 +1,5 @@
 package spider;
 
-import haxe.crypto.Md5;
 import haxe.Json;
 import haxe.PosInfos;
 import haxe.Template;
@@ -26,40 +25,40 @@ class Controller
 
 	/*
 
-		Pages 
-	
+		Pages
+
 	*/
 
 	public function doDefault() {
 		view({  });
 	}
 
-	
+
 	/*
 
 		Redirects
 
 		Very commonly used redirects that it is expected most applications will make use of.
-	
+
 	*/
 
-	public inline function redirectToHome():Void {
+	public inline function goHome():Void {
 		Spider.url = Spider.config.homeURL;
 	}
 
-	public inline function redirectToLost():Void {
+	public inline function goToLost():Void {
 		Spider.url = Spider.config.lostURL;
 	}
 
-	public inline function redirectToLogin():Void {
+	public inline function goToLogin():Void {
 		Spider.url = Spider.config.loginURL;
 	}
 
-	public inline function redirectToLogout():Void {
+	public inline function goToLogout():Void {
 		Spider.url = Spider.config.logoutURL;
 	}
 
-	public inline function redirectToError():Void {
+	public inline function goToError():Void {
 		Spider.url = Spider.config.errorURL;
 	}
 
@@ -68,8 +67,8 @@ class Controller
 
 		Output
 
-		Stuff for spitting out pages and views and stuff. 
-	
+		Stuff for spitting out pages and views and stuff.
+
 	*/
 
 	private function drawTemplate(path:String, options:{}):String {
@@ -128,35 +127,12 @@ class Controller
 
 	/*
 
-		Password Hashing Stuff 
-	
-	*/
-
-	private function salt():String {
-		return Md5.encode(Std.string(Math.random()));
-	}
-
-	private function hashPassword(deets:PasswordDetails, ?numBytes:Int = 64):String {
-		return PBKDF2.encode(deets.password, deets.salt, deets.iterations, numBytes);
-	}
-
-	private function checkPasswordsMatch(deets:PasswordDetails, hashedPassword:String):Bool {
-		if(hashPassword(deets) == hashedPassword) {
-			return true;
-		}
-
-		return false;
-	}
-
-
-	/* 
-
-		File Handling Stuff 
+		File Handling Stuff
 
 	*/
 
 	// TODO : Should return true on success false on fail
-	// should also buffer the file uploads 
+	// should also buffer the file uploads
 	private function uploadFile():Bool {
 		return false;
 	}
@@ -164,11 +140,11 @@ class Controller
 
 	/*
 
-		Useful stuff 
-	
+		Useful stuff
+
 	*/
 
-	// 
+	//
 	private function flash() {
 
 	}
@@ -210,8 +186,8 @@ class Controller
 
 	/*
 
-		Getters and Setters 
-	
+		Getters and Setters
+
 	*/
 
 	private function set_forceSSL(ssl:Bool):Bool {

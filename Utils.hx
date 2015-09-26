@@ -1,6 +1,10 @@
 package spider;
 
+// I don't like this being as global as it is 
+// also it only holds date/time stuff at the moment, so even the name is dumb 
+
 class Utils {
+
 	public static function getUKDateFormat():String {
 		var output = "";
 

@@ -45,6 +45,7 @@ class Spider
 		// connect
 		try {
 
+			// MySQL Connection
 			if(options.database.dbType == DBType.MySQL) {
 				if (
 					options.database.dbName 	== null ||
@@ -52,7 +53,7 @@ class Spider
 					options.database.dbPass 	== null ||
 					options.database.dbPort 	== null ||
 					options.database.dbSocket 	== null ||
-					options.database.dbUser 	== null 
+					options.database.dbUser 	== null
 				){
 					Log.error("Some MySQL options are missing.");
 				} else {
@@ -65,6 +66,7 @@ class Spider
 				}
 			}
 
+			// SQLite3 Connection
 			if(options.database.dbType == DBType.SQLite3) {
 				if(options.database.dbName == null){
 					Log.error("Must set a dbName when using SQLite3.");
@@ -79,6 +81,8 @@ class Spider
 				}
 			}
 
+			// No connection - left this here just in case we want to do
+			// something here later on
 			if(options.database.dbType == DBType.None) {
 
 			}
@@ -109,18 +113,18 @@ class Spider
 			}
 		}
 
-		// Run the Route 
+		// Run the Route
 		try {
 			Dispatch.run(
 				url,
 				new haxe.ds.StringMap(),
-				new app.routes.Routes() // wanted this to be configurable, not sure I can with Type :( 
+				new app.routes.Routes() // wanted this to be configurable, not sure I can with Type :(
 			);
-		} catch(e:Dynamic) { // I actually don't know what the real type of this error is but whatever, man! 
+		} catch(e:Dynamic) { // I actually don't know what the real type of this error is but whatever, man!
 			url = config.lostURL;
 		}
 
-		// Close Down 
+		// Close Down
 		if(config.database.dbType != DBType.None) {
 			database.close();
 		}
