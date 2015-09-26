@@ -14,6 +14,7 @@ With Spider, I'm not trying to do everything for you. Just enough to get you mov
 * Logging to file, for errors, etc.
 * Strong Password hashing with salt.
 * File uploads.
+* Blacklisting IP Addresses
 * [SpiderTools](https://github.com/championchap/SpiderTools), a convenient command line utility.
 * and more!
 
@@ -31,16 +32,15 @@ This is what it's like to start a new project that connects to an SQLite3 databa
 
 ```haxe
 public function new() {
-	var db = { dbType : DBType.SQLITE3, dbName = "spider" };
+	var db:DatabaseDetails = { dbName : "spider", dbType : DBType.SQLite3 };
 
 	var site = new Spider({
-		// config options
-		siteName : "My Awesome Site!",
-		database : db,
+		name 		: "My Awesome Site!",
+		database 	: db,
 		setupTables : setupTables
 	});
 
-	site.run(); // basic home page exists by default
+	site.run(); // Home Page exists by default
 }
 
 // db stuff is all handled with SPOD
@@ -95,7 +95,7 @@ class Routes {
 }
 ```
 
-We are just using the built in Haxe templates for the time being. They're pretty simple. 
+We are just using the built in Haxe templates for the time being. They're pretty simple.
 
 ```html
 <div>
