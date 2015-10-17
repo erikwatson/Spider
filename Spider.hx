@@ -8,6 +8,7 @@ import php.Lib;
 import php.Session;
 import php.Web;
 
+import spider.BlackList;
 import spider.Config.DBType;
 import spider.Log;
 import spider.Request;
@@ -24,6 +25,7 @@ class Spider
 	private var database:DB = new DB();
 	public var setupTables:Void->Void;
 
+	public var blackList:BlackList = new BlackList();
 	public static var config:Config = new Config();
 	public static var url(get, set):String;
 
@@ -127,6 +129,10 @@ class Spider
 		// Close Down
 		if(config.database.dbType != DBType.None) {
 			database.close();
+		}
+
+		for(line in blackList.contents) {
+			trace(line);
 		}
 
 		Session.close();
