@@ -12,7 +12,7 @@ class BlackList {
     public var location( get, null ):String;
     public var dir( get, null ):String;
 
-    private var contents:Array<String> = [];
+    public var contents:Array<String> = [];
 
     public function new() { readFile(); }
 
