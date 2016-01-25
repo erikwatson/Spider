@@ -1,16 +1,15 @@
-Spider
-======
-
-Spider is a tiny, easy to use Web Framework for Haxe targeting PHP.
-
-With Spider, I'm not trying to do everything for you. Just enough to get you moving in your own direction.
-
-
 ## WARNING
 
 Spider is currently in a state of flux. Every part of the codebase is likely to be touched and changed.
 
 Ultimately this will be for the better, but do not use it yet.
+
+
+# Spider
+
+Spider is a tiny, easy to use Web Framework for Haxe targeting PHP.
+
+With Spider, I'm not trying to do everything for you. Just enough to get you moving in your own direction.
 
 
 ## Features
