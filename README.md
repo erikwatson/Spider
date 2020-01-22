@@ -1,8 +1,6 @@
 ## WARNING
 
-Spider is currently in a state of flux. Every part of the codebase is likely to be touched and changed.
-
-Ultimately this will be for the better, but do not use it yet.
+Don't use it! I am not planning on keeping this up to date, but it did serve me well for a time :) 
 
 
 # Spider
